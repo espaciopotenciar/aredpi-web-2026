@@ -122,7 +122,7 @@
               </div>
             </sc-if>
           </div>
-          <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Te llega la invitación a tu correo corporativo.</p>
+          <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Te llega la invitación a tu correo corporativo. ¿No ves el calendario? <a href="{{ calLink }}" target="_blank" rel="noopener" style="color:#C4430F; font-weight:500;">Ábrelo aquí</a>.</p>
         </div>
       </sc-if>
 
@@ -271,6 +271,7 @@ class Component extends DCLogic {
       panelMax: phase === 'agenda' ? '1000px' : '620px',
       pos: this.props.embedded ? 'absolute' : 'fixed',
       nombreCorto: (this.state.nombre.trim().split(/\s+/)[0]) || '',
+      calLink: 'https://calendly.com/aredpi_/webapp?name=' + encodeURIComponent(this.state.nombre.trim()) + '&email=' + encodeURIComponent(this.state.email.trim()),
       calTargetRef: this.calTargetRef, calPlaceholder: !this.state.calLive,
       calDow: ['L', 'M', 'M', 'J', 'V', 'S', 'D'], calDays,
       calSelLabel: selName.charAt(0).toUpperCase() + selName.slice(1) + ' ' + this.state.calDay + ' de octubre',
