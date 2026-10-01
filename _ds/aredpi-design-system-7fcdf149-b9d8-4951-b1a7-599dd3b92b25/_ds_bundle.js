@@ -56,7 +56,10 @@ function Button({
     alignItems: 'center',
     justifyContent: showChevron ? 'space-between' : 'center',
     gap: 14,
-    height: h,
+    minHeight: h,
+    maxWidth: '100%',
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingLeft: padL,
     paddingRight: padR,
     boxSizing: 'border-box',
@@ -68,7 +71,8 @@ function Button({
     letterSpacing: '-0.005em',
     textDecoration: 'none',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'normal',
+    textAlign: 'left',
     userSelect: 'none',
     opacity: disabled ? 0.45 : 1,
     transition: 'transform var(--dur-fast) var(--ease-brand), box-shadow var(--dur-base) var(--ease-brand), background var(--dur-base) var(--ease-brand), border-color var(--dur-fast)',
@@ -183,7 +187,7 @@ function Kpi({
     minimumFractionDigits: p.dec,
     maximumFractionDigits: p.dec
   }) + p.post;
-  const fs = size === 'lg' ? 64 : size === 'sm' ? 28 : 'var(--kpi-size)';
+  const fs = size === 'lg' ? 'clamp(36px, 10vw, 64px)' : size === 'sm' ? 28 : 'var(--kpi-size)';
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
