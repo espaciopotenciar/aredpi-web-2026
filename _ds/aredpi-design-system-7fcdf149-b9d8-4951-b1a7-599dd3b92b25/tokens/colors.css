@@ -1,0 +1,23 @@
+:root{
+--bg:#fafaf8;--surface:#ffffff;--surface-2:#f1f1ee;--border:#e4e4e1;
+--ink:#2f2f2f;--ink-muted:#6f6f6f;--ink-faint:#c9c9c5;
+--orange:#ff6f31;--orange-deep:#f0501f;--orange-text:#c4430f;--orange-soft:#fff3ec;
+--amber:#ffc655;--amber-soft:#ffe9c4;--on-orange:#ffffff;
+--success:#2e7d4f;--error:#b3261e;
+/* semánticos */
+--surface-page:var(--bg);--surface-card:var(--surface);--surface-band:var(--surface-2);
+--surface-glass:rgba(255,255,255,0.72);--surface-selected:var(--orange-soft);
+--text-body:var(--ink);--text-muted:var(--ink-muted);--text-faint:var(--ink-faint);
+--text-link:var(--orange-text);--text-accent:var(--orange-text);--text-on-accent:var(--on-orange);
+--border-hairline:var(--border);--border-focus:var(--orange);
+--accent:var(--orange);--accent-strong:var(--orange-deep);
+--gradient-brand:linear-gradient(135deg,var(--orange) 0%,var(--orange-deep) 100%);
+--chart-budget:var(--ink);--chart-forecast:var(--orange);--chart-real:var(--amber);
+}
+[data-theme="dark"]{
+--bg:#0d0d0f;--surface:#17171a;--surface-2:#121215;--border:#2a2a2e;
+--ink:#f3f3f3;--ink-muted:#a8a8ad;--ink-faint:#3a3a3f;
+--orange-text:#ff8a4c;--orange-soft:#2a1a12;--amber-soft:#3a2e14;
+--success:#7fd6a4;--error:#ff8a80;
+--surface-glass:rgba(23,23,26,0.72);
+}

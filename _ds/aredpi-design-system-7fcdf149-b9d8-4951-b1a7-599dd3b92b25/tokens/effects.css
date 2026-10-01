@@ -1,0 +1,9 @@
+:root{
+--shadow-card:0 20px 50px rgba(47,47,47,0.06);
+--shadow-cta:0 10px 30px rgba(240,80,31,0.25);
+--glass-blur:14px;/* @kind other */
+--ease-brand:cubic-bezier(.22,1,.36,1);/* @kind other */
+--dur-fast:180ms;/* @kind other */--dur-base:320ms;/* @kind other */--dur-enter:700ms;/* @kind other */--stagger:60ms;/* @kind other */--enter-offset:20px;/* @kind spacing */
+--icon-stroke:1.8;/* @kind other */
+}
+[data-theme="dark"]{--shadow-card:0 30px 90px rgba(0,0,0,0.55);}
