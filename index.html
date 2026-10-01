@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>aREDPI · Tecnología hecha a medida para organizaciones de gran escala</title>
+  <meta name="description" content="Software boutique para organizaciones de gran escala. 25 años, más de 50 clientes y los fundadores presentes en cada proyecto.">
+  <meta property="og:title" content="aREDPI · Transformamos tu operación con tecnología hecha a medida.">
+  <meta property="og:description" content="Software boutique para organizaciones de gran escala. 25 años, más de 50 clientes y los fundadores presentes en cada proyecto.">
+  <meta property="og:image" content="assets/home-v2-frame-2.png">
+  <meta property="og:type" content="website">
+  <!-- TODO GTM: pegar acá el snippet de Google Tag Manager (head) -->
+  <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script> -->
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/base.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/styles.css">
+  <script src="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/_ds_bundle.js"></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="aredpi-site.js"></script>
+  <script src="aredpi-motion.js"></script>
+  <style>
+    html, body { margin: 0; background: #FAFAF8; overflow-x: clip; }
+    a { color: #C4430F; text-decoration: none; }
+    a:hover { color: #F0501F; }
+    @keyframes aredpiMarqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes aredpiMarqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes aredpiShine { from { background-position: 0% center; } to { background-position: 200% center; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+<div style="background:#FAFAF8; color:#2F2F2F; font-family:var(--font-sans); min-height:100vh;">
+
+  <header style="position:fixed; top:14px; left:14px; right:14px; z-index:50; display:flex; justify-content:center; pointer-events:none;">
+    <nav aria-label="Principal" style="pointer-events:auto; width:100%; max-width:1200px; height:64px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 10px 0 18px; border-radius:999px; background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px rgba(47,47,47,0.06);">
+      <a href="Home.dc.html" aria-label="aREDPI, inicio" style="display:flex; align-items:center;"><img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="height:44px; width:44px; mix-blend-mode:multiply; display:block;"></a>
+      <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:28px; font-size:15px; font-weight:500;">
+          <a href="#especialistas" style="color:#2F2F2F;" style-hover="color:#C4430F;">Nosotros</a>
+          <a href="#soluciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Soluciones</a>
+          <a href="Budget.dc.html" style="color:#2F2F2F;" style-hover="color:#C4430F;">WebApp Budget &amp; Forecast</a>
+          <a href="#como-trabajamos" style="color:#2F2F2F;" style-hover="color:#C4430F;">Enfoque</a>
+          <a href="https://aredpi.com/blog" style="color:#2F2F2F;" style-hover="color:#C4430F;">Blog</a>
+        </div>
+        <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una llamada</x-import></span>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuAria }}" aria-controls="menu-movil" aria-label="Abrir menú" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; display:grid; place-items:center; cursor:pointer; color:#2F2F2F;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+        </button>
+      </sc-if>
+    </nav>
+  </header>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="menu-movil" role="dialog" aria-modal="true" aria-label="Menú" style="position:fixed; inset:0; z-index:60; background:#FFFFFF; display:flex; flex-direction:column; padding:24px; box-sizing:border-box; gap:32px; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="height:44px; width:44px;">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Cerrar menú" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; display:grid; place-items:center; cursor:pointer; color:#2F2F2F;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+      <nav aria-label="Menú móvil" style="display:flex; flex-direction:column; gap:4px; font-size:30px; letter-spacing:-0.02em;">
+        <a href="#especialistas" onClick="{{ toggleMenu }}" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Nosotros</a>
+        <a href="#soluciones" onClick="{{ toggleMenu }}" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Soluciones</a>
+        <a href="Budget.dc.html" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">WebApp Budget &amp; Forecast</a>
+        <a href="#como-trabajamos" onClick="{{ toggleMenu }}" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Enfoque</a>
+        <a href="https://aredpi.com/blog" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Blog</a>
+      </nav>
+      <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" size="lg" full-width="{{ true }}" on-click="{{ openQFromMenu }}" hint-size="100%,60px">Agenda una llamada</x-import>
+    </div>
+  </sc-if>
+
+  <main>
+    <sc-if value="{{ reduce }}" hint-placeholder-val="{{ false }}">
+      <section aria-label="Presentación" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+        <img src="assets/home-v2-frame-2.png" alt="Cinta de seda naranja que se convierte en una grilla y un gráfico ascendente" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:70% center;">
+        <div style="position:absolute; inset:0; background:linear-gradient(90deg, #FAFAF8 0%, rgba(250,250,248,0.9) 35%, rgba(250,250,248,0) 65%);"></div>
+        <div style="position:relative; width:100%; max-width:1200px; margin:0 auto; padding:140px 24px 80px; box-sizing:border-box;">
+          <div style="max-width:560px; display:flex; flex-direction:column; gap:24px;">
+            <h1 style="margin:0; font-size:clamp(42px, 6vw, 76px); line-height:1; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">Transformamos tu operación con tecnología <span style="background-image:linear-gradient(to right, #C4430F 0%, #F0501F 25%, #FF8A4C 45%, #F0501F 65%, #C4430F 100%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent;">hecha a medida</span>.</h1>
+            <p style="margin:0; font-size:clamp(17px, 1.6vw, 20px); line-height:1.55; color:#6F6F6F; max-width:480px;">Software boutique para organizaciones de gran escala. 25 años, más de 50 clientes y los fundadores presentes en cada proyecto.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una llamada</x-import>
+              <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" href="Budget.dc.html" hint-size="340px,52px">Conoce la WebApp de Budget &amp; Forecast</x-import>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ motion }}" hint-placeholder-val="{{ true }}">
+      <section ref="{{ heroRef }}" aria-label="Presentación" style="position:relative; height:300vh;">
+        <div style="position:sticky; top:0; height:100vh; overflow:hidden;">
+          <div ref="{{ scaleRef }}" style="position:absolute; inset:0; transform-origin:70% 55%; will-change:transform;">
+            <img src="assets/home-v2-frame-1.png" alt="Cinta de seda naranja flotando sobre fondo blanco cálido" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{{ objPos }};">
+            <img ref="{{ f2Ref }}" src="assets/home-v2-frame-2.png" alt="" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{{ objPos }}; opacity:0; will-change:opacity;">
+            <svg ref="{{ svgRef }}" viewBox="0 0 1672 941" preserveAspectRatio="{{ svgAspect }}" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%;">
+              <g fill="none" stroke="#FF6F31" stroke-width="1" stroke-linecap="round" opacity="0.55">
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1120 900 H1660"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1120 820 H1660"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1120 740 H1660"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1120 660 H1660"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1200 900 V600"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1320 900 V600"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1440 900 V600"></path>
+                <path data-g="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1560 900 V600"></path>
+              </g>
+              <path data-f="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M1140 872 C1200 860 1260 850 1320 828 S1430 790 1480 752 S1580 680 1640 610" fill="none" stroke="#F0501F" stroke-width="2.4" stroke-linecap="round"></path>
+              <g fill="#F0501F">
+                <circle data-dot="1" cx="1200" cy="860" r="5" opacity="0"></circle>
+                <circle data-dot="1" cx="1320" cy="828" r="5" opacity="0"></circle>
+                <circle data-dot="1" cx="1440" cy="780" r="5" opacity="0"></circle>
+                <circle data-dot="1" cx="1560" cy="700" r="5" opacity="0"></circle>
+                <circle data-dot="1" cx="1640" cy="610" r="6" opacity="0"></circle>
+              </g>
+            </svg>
+          </div>
+          <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute; inset:0; background:linear-gradient(90deg, #FAFAF8 0%, rgba(250,250,248,0.85) 30%, rgba(250,250,248,0) 55%); pointer-events:none;"></div>
+          </sc-if>
+          <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, #FAFAF8 0%, rgba(250,250,248,0.94) 42%, rgba(250,250,248,0) 70%); pointer-events:none;"></div>
+          </sc-if>
+          <div style="position:relative; height:100%; max-width:1200px; margin:0 auto; padding:0 24px; box-sizing:border-box; display:flex; align-items:{{ heroAlign }}; padding-top:{{ heroPadTop }};">
+            <div style="display:grid; width:100%; max-width:540px;">
+              <div ref="{{ b1Ref }}" style="grid-area:1 / 1; display:flex; flex-direction:column; gap:24px; will-change:opacity, transform;">
+                <h1 style="margin:0; font-size:clamp(40px, 6vw, 76px); line-height:1; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">Transformamos tu operación con tecnología <span style="background-image:linear-gradient(to right, #C4430F 0%, #F0501F 25%, #FF8A4C 45%, #F0501F 65%, #C4430F 100%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:aredpiShine 6s linear infinite;">hecha a medida</span>.</h1>
+                <p style="margin:0; font-size:clamp(17px, 1.6vw, 20px); line-height:1.55; color:#6F6F6F; max-width:470px; text-wrap:pretty;">Software boutique para organizaciones de gran escala. 25 años, más de 50 clientes y los fundadores presentes en cada proyecto.</p>
+              </div>
+              <div ref="{{ b2Ref }}" style="grid-area:1 / 1; display:flex; flex-direction:column; gap:24px; opacity:0; visibility:hidden; will-change:opacity, transform;">
+                <h2 style="margin:0; font-size:clamp(38px, 5.4vw, 68px); line-height:1.02; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">Tus procesos, convertidos en sistema.</h2>
+                <p style="margin:0; font-size:clamp(17px, 1.6vw, 20px); line-height:1.55; color:#6F6F6F; max-width:470px; text-wrap:pretty;">Lo que hoy vive en hojas de cálculo y en la cabeza de pocas personas pasa a una plataforma trazable, integrada a SAP, SuccessFactors, Workday y Power BI.</p>
+              </div>
+              <div ref="{{ b3Ref }}" style="grid-area:1 / 1; display:flex; flex-direction:column; gap:32px; opacity:0; visibility:hidden; will-change:opacity, transform;">
+                <h2 style="margin:0; font-size:clamp(38px, 5.4vw, 68px); line-height:1.02; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">Del dato a la decisión, todo el año.</h2>
+                <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                  <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una llamada</x-import></span>
+                  <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" href="Budget.dc.html" hint-size="340px,52px">Conoce la WebApp de Budget &amp; Forecast</x-import>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div aria-hidden="true" style="position:absolute; right:clamp(14px, 2.4vw, 32px); top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:10px; align-items:center;">
+            <span ref="{{ d1Ref }}" style="width:4px; height:22px; border-radius:999px; background:#FF6F31; transition:height 500ms cubic-bezier(.22,1,.36,1), background 500ms;"></span>
+            <span ref="{{ d2Ref }}" style="width:4px; height:6px; border-radius:999px; background:#D6D6D2; transition:height 500ms cubic-bezier(.22,1,.36,1), background 500ms;"></span>
+            <span ref="{{ d3Ref }}" style="width:4px; height:6px; border-radius:999px; background:#D6D6D2; transition:height 500ms cubic-bezier(.22,1,.36,1), background 500ms;"></span>
+          </div>
+          <div ref="{{ hintRef }}" aria-hidden="true" style="position:absolute; left:50%; bottom:28px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; transition:opacity 500ms cubic-bezier(.22,1,.36,1);">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#6F6F6F;">Scroll</span>
+            <span style="width:1px; height:32px; background:linear-gradient(180deg, #6F6F6F, rgba(111,111,111,0));"></span>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <section id="soluciones" aria-labelledby="t-productos" style="position:relative; background:#FAFAF8;">
+      <sc-if value="{{ stepperOn }}" hint-placeholder-val="{{ true }}">
+        <div ref="{{ stepperRef }}" style="position:relative; height:500vh;">
+          <div style="position:sticky; top:0; height:100vh; display:flex; flex-direction:column; justify-content:center; padding:110px 24px 56px; box-sizing:border-box; overflow:hidden;">
+            <div style="width:100%; max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:clamp(32px, 5vh, 64px);">
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+                <h2 id="t-productos" style="margin:0; font-size:clamp(34px, 4.2vw, 52px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; max-width:640px; text-wrap:balance;">Tecnología que transforma operaciones críticas.</h2>
+                <span style="font-family:var(--font-mono); font-size:13px; letter-spacing:0.06em; color:#6F6F6F; font-variant-numeric:tabular-nums;">{{ stepLabel }} / 05</span>
+              </div>
+              <div style="height:2px; background:#E4E4E1; border-radius:999px; overflow:hidden;">
+                <div ref="{{ barRef }}" style="height:100%; width:100%; background:linear-gradient(90deg, #FF6F31, #F0501F); transform-origin:left center; transform:scaleX(0);"></div>
+              </div>
+              <div style="display:grid;">
+                <sc-for list="{{ productos }}" as="p" hint-placeholder-count="1">
+                  <div aria-hidden="{{ p.hidden }}" style="grid-area:1 / 1; display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:clamp(32px, 6vw, 96px); align-items:center; opacity:{{ p.op }}; transform:translateY({{ p.ty }}); pointer-events:{{ p.pe }}; transition:opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1);">
+                    <div style="display:flex; flex-direction:column; gap:20px;">
+                      <span style="font-family:var(--font-mono); font-size:clamp(96px, 14vw, 184px); line-height:0.86; letter-spacing:-0.06em; color:#2F2F2F; font-variant-numeric:tabular-nums;">{{ p.n }}</span>
+                      <h3 style="margin:0; font-size:clamp(28px, 3vw, 40px); line-height:1.08; font-weight:400; letter-spacing:-0.025em; text-wrap:balance;">{{ p.name }}</h3>
+                    </div>
+                    <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" notch="{{ p.cta }}" padding="clamp(28px, 3.4vw, 44px)" hint-size="100%,240px">
+                      <div style="display:flex; flex-direction:column; gap:32px; align-items:flex-start;">
+                        <span style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F;">{{ p.tag }}</span>
+                        <p style="margin:0; font-size:clamp(20px, 2vw, 26px); line-height:1.4; letter-spacing:-0.01em; text-wrap:pretty;">{{ p.line }}</p>
+                        <sc-if value="{{ p.cta }}" hint-placeholder-val="{{ false }}">
+                          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" href="Budget.dc.html" hint-size="220px,52px">Conoce la WebApp</x-import>
+                        </sc-if>
+                      </div>
+                    </x-import>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ stepperList }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:clamp(72px, 10vw, 128px) 24px; max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:40px;">
+          <h2 id="t-productos" data-reveal="1" style="margin:0; font-size:clamp(34px, 4.2vw, 52px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; text-wrap:balance;">Tecnología que transforma operaciones críticas.</h2>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <sc-for list="{{ productos }}" as="p" hint-placeholder-count="5">
+              <div data-reveal="1">
+                <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" notch="{{ p.cta }}" hint-size="100%,200px">
+                  <div style="display:flex; flex-direction:column; gap:16px; align-items:flex-start;">
+                    <span style="font-family:var(--font-mono); font-size:44px; line-height:1; letter-spacing:-0.04em;">{{ p.n }}</span>
+                    <h3 style="margin:0; font-size:24px; line-height:1.15; font-weight:500; letter-spacing:-0.015em;">{{ p.name }}</h3>
+                    <p style="margin:0; font-size:17px; line-height:1.55; color:#6F6F6F;">{{ p.line }}</p>
+                    <sc-if value="{{ p.cta }}" hint-placeholder-val="{{ false }}">
+                      <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" href="Budget.dc.html" hint-size="220px,52px">Conoce la WebApp</x-import>
+                    </sc-if>
+                  </div>
+                </x-import>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+
+    <section aria-labelledby="t-ia" style="padding:clamp(72px, 10vw, 128px) 24px; background:#F1F1EE;">
+      <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:clamp(40px, 6vw, 88px); align-items:center;">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <span data-reveal="1" style="align-self:flex-start; font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F; background:#FFF3EC; border:1px solid rgba(255,111,49,0.28); padding:7px 12px; border-radius:999px;">Nuevo en la WebApp</span>
+          <h2 id="t-ia" data-reveal="1" style="margin:0; font-size:clamp(38px, 5vw, 60px); line-height:1.02; font-weight:400; letter-spacing:-0.035em;">Pregúntale a tu presupuesto.</h2>
+          <p data-words="1" style="margin:0; font-size:clamp(20px, 2.2vw, 28px); line-height:1.4; letter-spacing:-0.012em; color:#2F2F2F; text-wrap:pretty;">El analista de IA arma gráficos, comparativos y resúmenes ejecutivos a pedido, sobre tus escenarios de budget y forecast. Sin esperar un reporte fijo.</p>
+        </div>
+        <div data-reveal="1" style="background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; box-shadow:0 20px 50px rgba(47,47,47,0.06); overflow:hidden;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; border-bottom:1px solid #E4E4E1;">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6F6F6F;">aREDPI WebApp · Analista de IA</span>
+            <span style="display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#2E7D4F;"><span style="width:6px; height:6px; border-radius:999px; background:#2E7D4F;"></span>En línea</span>
+          </div>
+          <div style="padding:clamp(18px, 3vw, 28px); display:flex; flex-direction:column; gap:18px; background:#FAFAF8;">
+            <div style="align-self:flex-end; max-width:82%; background:#2F2F2F; color:#FFFFFF; padding:14px 18px; border-radius:18px 18px 4px 18px; font-size:15px; line-height:1.45;">¿Qué escenario tiene más desvío en México este trimestre?</div>
+            <div style="background:#FFFFFF; border:1px solid #E4E4E1; border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:18px; max-width:94%;">
+              <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#6F6F6F;">Desvío vs. budget · México · T3</span>
+                <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F;">5 escenarios</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:12px; align-items:end; height:132px; border-bottom:1px solid #E4E4E1; padding:0 4px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">1,2 %</span><span style="width:100%; max-width:34px; height:30%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">2,1 %</span><span style="width:100%; max-width:34px; height:48%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#C4430F; font-weight:500;">4,2 %</span><span style="width:100%; max-width:34px; height:82%; background:linear-gradient(180deg, #FF6F31, #F0501F); border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">0,8 %</span><span style="width:100%; max-width:34px; height:20%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">1,6 %</span><span style="width:100%; max-width:34px; height:38%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:12px; margin-top:-10px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.04em; color:#6F6F6F; text-align:center;"><span>ESC 1</span><span>ESC 2</span><span style="color:#C4430F;">ESC 3</span><span>ESC 4</span><span>ESC 5</span></div>
+              <p data-type="1" style="margin:0; font-size:15px; line-height:1.55; color:#2F2F2F;">El escenario 3 es el de mayor desvío: +4,2 % sobre el budget del trimestre. Lo explica el ajuste de convenio de abril en Operaciones.</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:999px; padding:6px 6px 6px 18px;">
+              <span style="flex:1; font-size:14px; color:#6F6F6F;">Pregunta sobre tus escenarios…</span>
+              <span style="width:36px; height:36px; border-radius:999px; background:linear-gradient(135deg, #FF6F31, #F0501F); color:#FFFFFF; display:grid; place-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="especialistas" aria-labelledby="t-esp" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-esp" data-reveal="1" style="margin:0 0 48px; font-size:clamp(36px, 5vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">25 años en esto.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:20px;">
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" notch="{{ true }}" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">01</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">25 años en procesos de RRHH y Finanzas.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Conocemos el presupuesto salarial de grandes empresas desde dentro.</p>
+              </div>
+            </x-import>
+          </div>
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">02</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">Cambios en días, no en meses.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Trabajamos en ciclos cortos: una funcionalidad nueva llega rápido.</p>
+              </div>
+            </x-import>
+          </div>
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">03</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">Cerca de quienes lo usan.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Acompañamos a los equipos que operan la plataforma todos los días, no solo a la dirección.</p>
+              </div>
+            </x-import>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="aREDPI en números" style="padding:0 24px clamp(72px, 10vw, 128px);">
+      <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:64px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:32px 24px; padding:48px 0; border-top:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1;">
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Kpi" value="+25" label="años" size="lg" hint-size="100%,100px"></x-import>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Kpi" value="+50" label="clientes" size="lg" hint-size="100%,100px"></x-import>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Kpi" value="+500" label="aplicaciones" size="lg" hint-size="100%,100px"></x-import>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Kpi" value="+3.000" label="usuarios" size="lg" hint-size="100%,100px"></x-import>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Kpi" value="9" label="países" size="lg" tone="orange" hint-size="100%,100px"></x-import>
+        </div>
+        <!-- Logos de clientes: marquesina de dos filas en sentidos opuestos (pausa con hover). Con prefers-reduced-motion se muestra una grilla estática. -->
+        <sc-if value="{{ logosMotion }}" hint-placeholder-val="{{ true }}">
+      <div role="region" aria-label="Clientes" style="display:flex; flex-direction:column; gap:8px; overflow:hidden; background:#FAFAF8; -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);">
+        <div style="display:flex; align-items:center; width:max-content; background:#FAFAF8; animation:aredpiMarqueeL 90s linear infinite;" style-hover="animation-play-state:paused;">
+          <sc-for list="{{ logosRow1 }}" as="l" hint-placeholder-count="13">
+            <span style="flex:none; display:flex; padding:0 clamp(6px, 1.2vw, 18px);"><img src="{{ l.src }}" alt="{{ l.alt }}" aria-hidden="{{ l.dup }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></span>
+          </sc-for>
+        </div>
+        <div style="display:flex; align-items:center; width:max-content; background:#FAFAF8; animation:aredpiMarqueeR 90s linear infinite;" style-hover="animation-play-state:paused;">
+          <sc-for list="{{ logosRow2 }}" as="l" hint-placeholder-count="13">
+            <span style="flex:none; display:flex; padding:0 clamp(6px, 1.2vw, 18px);"><img src="{{ l.src }}" alt="{{ l.alt }}" aria-hidden="{{ l.dup }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></span>
+          </sc-for>
+        </div>
+      </div>
+        </sc-if>
+        <sc-if value="{{ logosStatic }}" hint-placeholder-val="{{ false }}">
+      <ul aria-label="Clientes" style="list-style:none; margin:0 auto; padding:0; max-width:1200px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:4px 16px; align-items:center; background:#FAFAF8;">
+        <sc-for list="{{ logosAll }}" as="l" hint-placeholder-count="26">
+          <li style="display:flex; justify-content:center;"><img src="{{ l.src }}" alt="{{ l.alt }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></li>
+        </sc-for>
+      </ul>
+        </sc-if>
+      </div>
+    </section>
+
+    <section id="socios" aria-labelledby="t-socios" style="padding:0 24px clamp(72px, 10vw, 128px);">
+      <div style="max-width:1200px; margin:0 auto;">
+        <div style="display:flex; flex-direction:column; gap:20px; max-width:780px; margin-bottom:48px;">
+          <h2 id="t-socios" data-reveal="1" style="margin:0; font-size:clamp(36px, 5vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Quiénes están detrás.</h2>
+          <p data-reveal="1" style="margin:0; font-size:clamp(18px, 1.8vw, 21px); line-height:1.55; color:#6F6F6F; text-wrap:pretty;">aREDPI la dirigen sus dos socios. Hace 25 años acompañan a grandes empresas en sus procesos de RR. HH. y Finanzas, y siguen presentes en cada proyecto, de principio a fin.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap:20px;">
+          <article data-reveal="1" data-reveal-delay="0" style="position:relative; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:16px; padding:clamp(28px, 4vw, 40px); display:flex; flex-direction:column; gap:28px; box-shadow:0 20px 50px rgba(47,47,47,0.06);">
+            <span aria-hidden="true" style="position:absolute; top:-1px; right:-1px; width:28px; height:28px; background:#FAFAF8; border-left:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1;"></span>
+            <img src="assets/team/persona-2.png" alt="Martín Schafer" width="160" height="160" loading="lazy" style="width:160px; height:160px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);">
+            <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px;">
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <h3 style="margin:0; font-size:24px; line-height:1.2; font-weight:500; letter-spacing:-0.015em; color:#2F2F2F;">Martín Schafer</h3>
+                <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; color:#C4430F;">Socio gerente</span>
+              </div>
+              <a href="https://www.linkedin.com/in/martin-schafer/" target="_blank" rel="noopener" aria-label="LinkedIn de Martín Schafer" style="flex:none; width:36px; height:36px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; color:#2F2F2F; display:grid; place-items:center; transition:color 300ms ease, border-color 300ms ease;" style-hover="color:#FF6F31; border-color:#FF6F31;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            </div>
+          </article>
+          <article data-reveal="1" data-reveal-delay="120" style="position:relative; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:16px; padding:clamp(28px, 4vw, 40px); display:flex; flex-direction:column; gap:28px; box-shadow:0 20px 50px rgba(47,47,47,0.06);">
+            <span aria-hidden="true" style="position:absolute; top:-1px; right:-1px; width:28px; height:28px; background:#FAFAF8; border-left:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1;"></span>
+            <img src="assets/team/persona-1.png" alt="Daniel Escalante" width="160" height="160" loading="lazy" style="width:160px; height:160px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);">
+            <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px;">
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <h3 style="margin:0; font-size:24px; line-height:1.2; font-weight:500; letter-spacing:-0.015em; color:#2F2F2F;">Daniel Escalante</h3>
+                <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; color:#C4430F;">Socio gerente</span>
+              </div>
+              <a href="https://www.linkedin.com/in/daniel-escalante-6b9763b/" target="_blank" rel="noopener" aria-label="LinkedIn de Daniel Escalante" style="flex:none; width:36px; height:36px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; color:#2F2F2F; display:grid; place-items:center; transition:color 300ms ease, border-color 300ms ease;" style-hover="color:#FF6F31; border-color:#FF6F31;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-test" style="padding:clamp(72px, 10vw, 128px) 24px; background:#F1F1EE;">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-test" data-reveal="1" style="margin:0 0 48px; font-size:clamp(36px, 5vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Lo que dicen quienes lo usan.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:20px; align-items:stretch;">
+          <sc-for list="{{ testimonios }}" as="t" hint-placeholder-count="3">
+            <figure data-reveal="1" style="margin:0; display:flex; flex-direction:column; justify-content:space-between; gap:28px; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; padding:32px; box-shadow:0 20px 50px rgba(47,47,47,0.06);">
+              <blockquote style="margin:0; display:flex; flex-direction:column; gap:14px;">
+                <span aria-hidden="true" style="font-family:var(--font-mono); font-size:40px; line-height:0.6; color:#FF6F31;">“</span>
+                <p style="margin:0; font-size:17px; line-height:1.6; text-wrap:pretty;">{{ t.cita }}</p>
+              </blockquote>
+              <figcaption style="display:flex; flex-direction:column; gap:4px; padding-top:20px; border-top:1px solid #E4E4E1;">
+                <span style="font-size:16px; font-weight:600;">{{ t.nombre }}</span>
+                <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:#6F6F6F;">{{ t.pie }}</span>
+              </figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-trabajamos" aria-labelledby="t-como" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-como" data-reveal="1" style="margin:0 0 48px; font-size:clamp(36px, 5vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Cómo trabajamos.</h2>
+        <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:32px;">
+            <div aria-hidden="true" style="position:absolute; left:28px; right:calc(33.33% - 28px); top:27px; height:1px; background:#E4E4E1;">
+              <div data-draw="x" style="position:absolute; inset:0; background:#FF6F31; transform-origin:left center; transform:scaleX(0);"></div>
+            </div>
+            <sc-for list="{{ pasos }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative; display:flex; flex-direction:column; gap:20px;">
+                <span style="width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <h3 style="margin:0; font-size:26px; line-height:1.15; font-weight:500; letter-spacing:-0.015em; max-width:280px;">{{ s.t }}</h3>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative; display:flex; flex-direction:column; gap:36px; padding-left:76px;">
+            <div aria-hidden="true" style="position:absolute; left:27px; top:28px; bottom:28px; width:1px; background:#E4E4E1;">
+              <div data-draw="y" style="position:absolute; inset:0; background:#FF6F31; transform-origin:center top; transform:scaleY(0);"></div>
+            </div>
+            <sc-for list="{{ pasos }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative; min-height:56px; display:flex; align-items:center;">
+                <span style="position:absolute; left:-76px; top:0; width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">{{ s.t }}</h3>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div data-reveal="1" style="margin-top:56px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; width:fit-content; max-width:100%; box-sizing:border-box; padding:10px 24px 10px 10px; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:999px;">
+          <div style="display:flex;"><img src="assets/team/persona-1.png" alt="" width="48" height="48" loading="lazy" style="width:48px; height:48px; margin-left:0px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);"><img src="assets/team/persona-2.png" alt="" width="48" height="48" loading="lazy" style="width:48px; height:48px; margin-left:-14px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);"></div>
+          <span style="font-size:17px; font-weight:500; color:#2F2F2F;">Te acompañan sus socios, no un ticket.</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-cta" style="padding:0 clamp(12px, 2vw, 24px) clamp(72px, 10vw, 128px);">
+      <div style="position:relative; max-width:1320px; margin:0 auto; border-radius:32px; overflow:hidden; min-height:540px; display:flex; align-items:center; padding:clamp(24px, 5vw, 72px); box-sizing:border-box; border:1px solid #E4E4E1;">
+        <img src="assets/home-v2-frame-1.png" alt="" aria-hidden="true" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:78% 40%;">
+        <div data-reveal="1" style="position:relative; width:100%; max-width:620px; box-sizing:border-box; background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); border-radius:24px; padding:clamp(28px, 4vw, 48px); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px rgba(47,47,47,0.06); display:flex; flex-direction:column; gap:28px;">
+          <h2 id="t-cta" style="margin:0; font-size:clamp(32px, 4.4vw, 52px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; text-wrap:balance;">¿Buscas un socio tecnológico? Hablemos de tu operación.</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una llamada</x-import></span>
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" href="Costo-Presupuesto.dc.html" hint-size="360px,52px">Calcula cuánto te cuesta tu presupuesto</x-import>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#F1F1EE; padding:72px 24px 40px; border-top:1px solid #E4E4E1;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:40px;">
+        <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="64" height="64" loading="lazy" style="width:64px; height:64px; mix-blend-mode:multiply;">
+        <nav aria-label="Pie" style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="#especialistas" style="color:#2F2F2F;" style-hover="color:#C4430F;">Nosotros</a>
+          <a href="#soluciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Soluciones</a>
+          <a href="#como-trabajamos" style="color:#2F2F2F;" style-hover="color:#C4430F;">Enfoque</a>
+          <a href="https://aredpi.com/blog" style="color:#2F2F2F;" style-hover="color:#C4430F;">Blog</a>
+          <a href="https://aredpi.com/terminos-y-condiciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Términos y condiciones</a>
+        </nav>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="mailto:info@aredpi.com" style="color:#2F2F2F;" style-hover="color:#C4430F;">info@aredpi.com</a>
+          <a href="tel:+543484428046" style="color:#2F2F2F; font-family:var(--font-mono); font-size:14px;" style-hover="color:#C4430F;">+54 348 4428046</a>
+          <a href="https://wa.me/543484428046" style="color:#2F2F2F;" style-hover="color:#C4430F;">WhatsApp</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <!-- TODO: confirmar URLs de redes -->
+          <a href="https://www.linkedin.com/company/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">LinkedIn</a>
+          <a href="https://www.instagram.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Instagram</a>
+          <a href="https://www.facebook.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Facebook</a>
+        </div>
+      </div>
+      <p style="margin:0; padding-top:24px; border-top:1px solid #E4E4E1; font-size:13px; color:#6F6F6F;">© aREDPI. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <dc-import name="Calificador" open="{{ qOpen }}" on-close="{{ closeQ }}" source="calificador" hint-size="0px,0px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof innerWidth === 'number' ? innerWidth : 1280, qOpen: false, menu: false, step: 0,
+    reduce: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches };
+  heroRef = React.createRef(); scaleRef = React.createRef(); f2Ref = React.createRef(); svgRef = React.createRef();
+  b1Ref = React.createRef(); b2Ref = React.createRef(); b3Ref = React.createRef();
+  d1Ref = React.createRef(); d2Ref = React.createRef(); d3Ref = React.createRef(); hintRef = React.createRef();
+  stepperRef = React.createRef(); barRef = React.createRef();
+  p = 0; hinted = false;
+
+  // Testimonios reales y textuales. Las tarjetas con cita vacía no se muestran; para sumar uno, agregar un ítem.
+  static TESTIMONIOS = [
+    { cita: 'Hemos implementado PMO en el año 2022, y esto nos ha permitido reducir drásticamente los tiempos dedicados a la elaboración del presupuesto anual, y a su vez hemos ganado mucho en precisión y confiabilidad de los datos que proveemos al área Financiera y casa matriz. Excelente desarrollo, plataforma y servicio.', nombre: 'Mario Nigro', cargo: 'Ex Gerente de RR. HH.', empresa: 'Eurofarma' },
+    { cita: 'Aredpi nos ha permitido mejorar significativamente los tiempos de entrega y simular diversos escenarios alineados a la necesidad de la compañía.', nombre: 'Jorge Del Águila', cargo: '' /* TODO: cargo a confirmar */, empresa: 'Soldexa Perú' },
+    { cita: 'Pasamos de caos y manualidad, a un proceso prolijo y automatizado. Hoy todo está en un solo lugar. Podemos enfocarnos en analizar y no en calcular.', nombre: 'Patricia Maidana', cargo: 'Sr. Manager HR', empresa: 'Cirion' }
+  ];
+  static PRODUCTOS = [
+    { n: '01', tag: 'Producto estrella', name: 'aREDPI WebApp de Budget & Forecast', line: 'Planifica, simula y controla el gasto salarial en un solo lugar, con un analista de IA que responde en segundos.', cta: true },
+    { n: '02', tag: 'Variables', name: 'Cálculo de comisiones y bonos', line: 'Incentivos claros, procesos simples. La liquidación de variables, automatizada y trazable.' },
+    { n: '03', tag: 'Operaciones', name: 'Gestión de órdenes integrada a eCommerce', line: 'Desde la compra hasta la entrega, sin fricciones.' },
+    { n: '04', tag: 'Datos', name: 'Dashboards en Power BI', line: 'Del dato al insight estratégico, con tableros ejecutivos en tiempo real.' },
+    { n: '05', tag: 'A medida', name: 'Desarrollos a medida', line: 'Tecnología que nace desde tus procesos, cuando los estándares no alcanzan.' }
+  ];
+
+  static LOGOS = [['toyota','Toyota Boshoku'],['nestle','Nestlé'],['novartis','Novartis'],['sanofi','Sanofi'],['philip-morris','Philip Morris International'],['nespresso','Nespresso'],['supervielle','Supervielle'],['tgn','TGN'],['cirion','Cirion'],['soldexa','Soldexa'],['conarco','Conarco'],['carestino','Carestino'],['craveri','Craveri'],['eichler','Eichler'],['esab','ESAB'],['finadiet','Finadiet'],['fischer','fischer'],['garro-fabril','Garro Fabril'],['imvi','IMVI Laboratorios'],['la-esquina-del-neumatico','La Esquina del Neumático'],['massalin','Massalin Particulares'],['puelche','Puelche'],['sar','SAR Sewtech Argentina'],['solution-box','Solution Box'],['virulana','Virulana'],['west-arco-esab','West Arco']];
+  logoVals() {
+    const L = this.constructor.LOGOS.map(([f, a]) => ({ src: 'assets/clientes/' + f + '.png', alt: a, dup: 'false' }));
+    const half = Math.ceil(L.length / 2), dup = arr => arr.concat(arr.map(l => ({ ...l, alt: '', dup: 'true' })));
+    return { logosRow1: dup(L.slice(0, half)), logosRow2: dup(L.slice(half)), logosAll: L, logosMotion: !this.state.reduce, logosStatic: !!this.state.reduce };
+  }
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: innerWidth });
+    addEventListener('resize', this.onResize);
+    const boot = () => { if (!window.AredpiMotion) return (this.bootT = setTimeout(boot, 50)); AredpiMotion.start(); this.off = AredpiMotion.onFrame(this.tick); };
+    boot();
+  }
+  componentWillUnmount() { removeEventListener('resize', this.onResize); clearTimeout(this.bootT); this.off && this.off(); }
+
+  tick = () => { this.tickHero(); this.tickStepper(); };
+
+  tickHero() {
+    const el = this.heroRef.current; if (!el) return;
+    const c = (v) => Math.min(1, Math.max(0, v));
+    const rc = el.getBoundingClientRect(), tot = rc.height - innerHeight;
+    const target = tot > 0 ? c(-rc.top / tot) : 0;
+    this.p += (target - this.p) * 0.1; if (Math.abs(target - this.p) < 0.0004) this.p = target;
+    const p = this.p;
+    if (this.f2Ref.current) this.f2Ref.current.style.opacity = c((p - 0.30) / 0.30).toFixed(3);
+    if (this.scaleRef.current) this.scaleRef.current.style.transform = 'scale(' + (1 + 0.06 * p).toFixed(4) + ')';
+    const svg = this.svgRef.current;
+    if (svg) {
+      const d = c((p - 0.62) / 0.30);
+      svg.querySelectorAll('[data-g]').forEach((g, k) => g.style.strokeDashoffset = (1 - c(d * 1.8 - k * 0.07)).toFixed(3));
+      svg.querySelectorAll('[data-f]').forEach(f => f.style.strokeDashoffset = (1 - c((d - 0.3) / 0.7)).toFixed(3));
+      svg.querySelectorAll('[data-dot]').forEach((o, k) => o.style.opacity = c((d - 0.4 - k * 0.11) / 0.1).toFixed(3));
+    }
+    const set = (r, o, dir) => { const e = r.current; if (!e) return; e.style.opacity = o.toFixed(3); e.style.transform = 'translateY(' + ((1 - o) * 20 * dir).toFixed(1) + 'px)'; e.style.visibility = o < 0.01 ? 'hidden' : 'visible'; e.style.pointerEvents = o > 0.5 ? 'auto' : 'none'; };
+    const o1 = 1 - c((p - 0.22) / 0.06);
+    const o2 = p < 0.46 ? c((p - 0.30) / 0.08) : 1 - c((p - 0.55) / 0.06);
+    const o3 = c((p - 0.66) / 0.08);
+    set(this.b1Ref, o1, -1); set(this.b2Ref, o2, p < 0.46 ? 1 : -1); set(this.b3Ref, o3, 1);
+    const act = p < 0.29 ? 0 : p < 0.63 ? 1 : 2;
+    [this.d1Ref, this.d2Ref, this.d3Ref].forEach((r, k) => { if (r.current) { r.current.style.height = k === act ? '22px' : '6px'; r.current.style.background = k === act ? '#FF6F31' : '#D6D6D2'; } });
+    if (!this.hinted && target > 0.01 && this.hintRef.current) { this.hinted = true; this.hintRef.current.style.opacity = '0'; }
+  }
+
+  tickStepper() {
+    const el = this.stepperRef.current; if (!el) return;
+    const rc = el.getBoundingClientRect(), tot = rc.height - innerHeight;
+    const p = Math.min(1, Math.max(0, -rc.top / tot));
+    const step = Math.min(4, Math.floor(p * 5));
+    if (this.barRef.current) this.barRef.current.style.transform = 'scaleX(' + Math.max(0.2, p).toFixed(4) + ')';
+    if (step !== this.state.step) this.setState({ step });
+  }
+
+  renderVals() {
+    const isDesk = this.state.w >= 1024, reduce = this.state.reduce, step = this.state.step;
+    const stepperOn = isDesk && !reduce;
+    return {
+      isDesk, isMobile: !isDesk, reduce, motion: !reduce,
+      stepperOn, stepperList: !stepperOn,
+      objPos: isDesk ? 'center center' : '70% center',
+      svgAspect: isDesk ? 'xMidYMid slice' : 'xMaxYMid slice',
+      heroAlign: isDesk ? 'center' : 'flex-start',
+      heroPadTop: isDesk ? '0px' : '112px',
+      heroRef: this.heroRef, scaleRef: this.scaleRef, f2Ref: this.f2Ref, svgRef: this.svgRef,
+      b1Ref: this.b1Ref, b2Ref: this.b2Ref, b3Ref: this.b3Ref, d1Ref: this.d1Ref, d2Ref: this.d2Ref, d3Ref: this.d3Ref, hintRef: this.hintRef,
+      stepperRef: this.stepperRef, barRef: this.barRef,
+      stepLabel: '0' + (step + 1),
+      productos: this.constructor.PRODUCTOS.map((p, i) => ({ ...p, cta: !!p.cta,
+        op: stepperOn ? (i === step ? 1 : 0) : 1, ty: stepperOn ? (i === step ? '0px' : (i < step ? '-24px' : '24px')) : '0px',
+        pe: stepperOn && i !== step ? 'none' : 'auto', hidden: stepperOn && i !== step ? 'true' : 'false' })),
+      cardBig: { padding: 'clamp(28px, 3.4vw, 44px)' },
+      cardFill: { width: '100%' },
+      ...this.logoVals(),
+      testimonios: this.constructor.TESTIMONIOS.filter(t => t.cita && t.cita.trim()).map(t => ({ ...t, pie: [t.cargo, t.empresa].filter(Boolean).join(' · ') })),
+      pasos: [{ n: '01', t: 'Diagnóstico' }, { n: '02', t: 'Diseño y configuración' }, { n: '03', t: 'Puesta en marcha y acompañamiento' }],
+      qOpen: this.state.qOpen,
+      openQ: () => this.setState({ qOpen: true }),
+      openQFromMenu: () => this.setState({ menu: false, qOpen: true }),
+      closeQ: () => this.setState({ qOpen: false }),
+      menuOpen: this.state.menu && !isDesk,
+      menuAria: this.state.menu ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu }))
+    };
+  }
+}
+</script>
+</body>
+</html>

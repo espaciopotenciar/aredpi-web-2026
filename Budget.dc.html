@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>aREDPI WebApp de Budget &amp; Forecast · Tu presupuesto salarial en días, no semanas</title>
+  <meta name="description" content="Centraliza el budget y el forecast de gastos salariales, simula hasta 5 escenarios en simultáneo y compara presupuesto, forecast y real en una sola vista.">
+  <meta property="og:title" content="aREDPI WebApp de Budget &amp; Forecast · Tu presupuesto salarial. En días, no semanas.">
+  <meta property="og:description" content="Centraliza el budget y el forecast de gastos salariales, simula hasta 5 escenarios en simultáneo y compara presupuesto, forecast y real en una sola vista.">
+  <meta property="og:image" content="assets/home-v2-frame-2.png">
+  <meta property="og:type" content="website">
+  <!-- TODO GTM: pegar acá el snippet de Google Tag Manager (head) -->
+  <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script> -->
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/base.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/styles.css">
+  <script src="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/_ds_bundle.js"></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="aredpi-site.js"></script>
+  <script src="aredpi-motion.js"></script>
+  <script src="fondo-animado-budget-claro.js"></script>
+  <style>
+    html, body { margin: 0; background: #FAFAF8; overflow-x: clip; }
+    a { color: #C4430F; text-decoration: none; }
+    a:hover { color: #F0501F; }
+    @keyframes aredpiMarqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes aredpiMarqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes aredpiShine { from { background-position: 0% center; } to { background-position: 200% center; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+<div style="background:#FAFAF8; color:#2F2F2F; font-family:var(--font-sans); min-height:100vh;">
+
+  <header style="position:fixed; top:14px; left:14px; right:14px; z-index:50; display:flex; justify-content:center; pointer-events:none;">
+    <nav aria-label="Principal" style="pointer-events:auto; width:100%; max-width:1200px; height:64px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 10px 0 18px; border-radius:999px; background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px rgba(47,47,47,0.06);">
+      <a href="Home.dc.html" aria-label="aREDPI, inicio" style="display:flex; align-items:center;"><img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="height:44px; width:44px; mix-blend-mode:multiply; display:block;"></a>
+      <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:28px; font-size:15px; font-weight:500;">
+          <a href="Home.dc.html#especialistas" style="color:#2F2F2F;" style-hover="color:#C4430F;">Nosotros</a>
+          <a href="Home.dc.html#soluciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Soluciones</a>
+          <a href="Budget.dc.html" aria-current="page" style="color:#C4430F;">WebApp Budget &amp; Forecast</a>
+          <a href="Home.dc.html#como-trabajamos" style="color:#2F2F2F;" style-hover="color:#C4430F;">Enfoque</a>
+          <a href="https://aredpi.com/blog" style="color:#2F2F2F;" style-hover="color:#C4430F;">Blog</a>
+        </div>
+        <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una reunión</x-import></span>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuAria }}" aria-controls="menu-movil" aria-label="Abrir menú" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; display:grid; place-items:center; cursor:pointer; color:#2F2F2F;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+        </button>
+      </sc-if>
+    </nav>
+  </header>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="menu-movil" role="dialog" aria-modal="true" aria-label="Menú" style="position:fixed; inset:0; z-index:60; background:#FFFFFF; display:flex; flex-direction:column; padding:24px; box-sizing:border-box; gap:32px; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="height:44px; width:44px;">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Cerrar menú" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; display:grid; place-items:center; cursor:pointer; color:#2F2F2F;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+      <nav aria-label="Menú móvil" style="display:flex; flex-direction:column; gap:4px; font-size:30px; letter-spacing:-0.02em;">
+        <a href="Home.dc.html#especialistas" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Nosotros</a>
+        <a href="Home.dc.html#soluciones" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Soluciones</a>
+        <a href="Budget.dc.html" onClick="{{ toggleMenu }}" style="color:#C4430F; padding:10px 0; border-bottom:1px solid #E4E4E1;">WebApp Budget &amp; Forecast</a>
+        <a href="Home.dc.html#como-trabajamos" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Enfoque</a>
+        <a href="https://aredpi.com/blog" style="color:#2F2F2F; padding:10px 0; border-bottom:1px solid #E4E4E1;">Blog</a>
+      </nav>
+      <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" size="lg" full-width="{{ true }}" on-click="{{ openQFromMenu }}" hint-size="100%,60px">Agenda una reunión</x-import>
+    </div>
+  </sc-if>
+
+  <main>
+    <section aria-labelledby="t-hero" style="position:relative; min-height:max(100vh, 780px); overflow:hidden; display:flex; align-items:{{ heroAlign }};">
+      <canvas ref="{{ canvasRef }}" aria-hidden="true" style="position:absolute; inset:0; z-index:0; width:100%; height:100%; display:block;"></canvas>
+      <div style="position:relative; z-index:1; width:100%; max-width:1200px; margin:0 auto; padding:{{ heroPad }}; box-sizing:border-box;">
+        <div style="max-width:560px; display:flex; flex-direction:column; gap:24px;">
+          <span data-reveal="1" style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F;">aREDPI WebApp de Budget &amp; Forecast</span>
+          <h1 id="t-hero" style="margin:0; font-size:clamp(42px, 6vw, 78px); line-height:1; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">Tu presupuesto salarial. <span style="background-image:linear-gradient(to right, #C4430F 0%, #F0501F 25%, #FF8A4C 45%, #F0501F 65%, #C4430F 100%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:aredpiShine 6s linear infinite;">En días, no semanas.</span></h1>
+          <p style="margin:0; font-size:clamp(17px, 1.6vw, 20px); line-height:1.55; color:#6F6F6F; text-wrap:pretty;">Centraliza el budget y el forecast de gastos salariales, simula hasta 5 escenarios en simultáneo y compara presupuesto, forecast y real en una sola vista.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una reunión</x-import></span>
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" href="Costo-Presupuesto.dc.html" hint-size="290px,52px">Calcula cuánto te cuesta hoy</x-import>
+          </div>
+          <p style="margin:0; font-size:14px; line-height:1.5; color:#6F6F6F;">20 minutos con el equipo. Te mostramos cómo se vería con tus números.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Clientes" style="padding:40px 24px; border-top:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1; background:#FFFFFF;">
+        <!-- Logos de clientes: marquesina de dos filas en sentidos opuestos (pausa con hover). Con prefers-reduced-motion se muestra una grilla estática. -->
+        <sc-if value="{{ logosMotion }}" hint-placeholder-val="{{ true }}">
+      <div role="region" aria-label="Clientes" style="display:flex; flex-direction:column; gap:8px; overflow:hidden; background:#FFFFFF; -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);">
+        <div style="display:flex; align-items:center; width:max-content; background:#FFFFFF; animation:aredpiMarqueeL 90s linear infinite;" style-hover="animation-play-state:paused;">
+          <sc-for list="{{ logosRow1 }}" as="l" hint-placeholder-count="13">
+            <span style="flex:none; display:flex; padding:0 clamp(6px, 1.2vw, 18px);"><img src="{{ l.src }}" alt="{{ l.alt }}" aria-hidden="{{ l.dup }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></span>
+          </sc-for>
+        </div>
+        <div style="display:flex; align-items:center; width:max-content; background:#FFFFFF; animation:aredpiMarqueeR 90s linear infinite;" style-hover="animation-play-state:paused;">
+          <sc-for list="{{ logosRow2 }}" as="l" hint-placeholder-count="13">
+            <span style="flex:none; display:flex; padding:0 clamp(6px, 1.2vw, 18px);"><img src="{{ l.src }}" alt="{{ l.alt }}" aria-hidden="{{ l.dup }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></span>
+          </sc-for>
+        </div>
+      </div>
+        </sc-if>
+        <sc-if value="{{ logosStatic }}" hint-placeholder-val="{{ false }}">
+      <ul aria-label="Clientes" style="list-style:none; margin:0 auto; padding:0; max-width:1200px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:4px 16px; align-items:center; background:#FFFFFF;">
+        <sc-for list="{{ logosAll }}" as="l" hint-placeholder-count="26">
+          <li style="display:flex; justify-content:center;"><img src="{{ l.src }}" alt="{{ l.alt }}" width="536" height="235" loading="lazy" style="display:block; height:clamp(60px, 6vw, 84px); width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7; transition:filter 300ms ease, opacity 300ms ease;" style-hover="filter:none; opacity:1;"></li>
+        </sc-for>
+      </ul>
+        </sc-if>
+    </section>
+
+    <section aria-labelledby="t-problema" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-problema" data-words="1" style="margin:0 0 48px; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; max-width:820px; text-wrap:balance;">Cada cambio de supuesto obliga a rehacer la hoja de cálculo.</h2>
+        <ol data-seq="1" style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap:16px;">
+          <sc-for list="{{ dolores }}" as="d" hint-placeholder-count="5">
+            <li style="position:relative; overflow:hidden; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:18px; padding:28px 24px; display:flex; flex-direction:column; justify-content:space-between; gap:40px; min-height:200px; box-sizing:border-box;">
+              <span data-seq-bar="1" aria-hidden="true" style="position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg, #FF6F31, #F0501F); transform-origin:left center; transform:scaleX(0);"></span>
+              <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">{{ d.n }}</span>
+              <span style="font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em; text-wrap:balance;">{{ d.t }}</span>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-vivo" style="padding:clamp(72px, 10vw, 128px) 24px; background:#F1F1EE;">
+      <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+        <div style="display:flex; flex-direction:column; gap:24px; max-width:900px;">
+          <span data-reveal="1" style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F;">Un presupuesto vivo todo el año</span>
+          <h2 id="t-vivo" data-reveal="1" style="margin:0; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">No es un proceso de una vez al año.</h2>
+          <p data-words="1" style="margin:0; font-size:clamp(21px, 2.4vw, 30px); line-height:1.38; letter-spacing:-0.012em; text-wrap:pretty;">Armas el presupuesto y después le das seguimiento mes a mes: comparativos de desvíos por país, área y concepto que hoy Finanzas no llega a hacer con ese detalle.</p>
+        </div>
+        <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:32px; padding-top:16px;">
+            <div aria-hidden="true" style="position:absolute; left:28px; right:calc(33.33% - 28px); top:43px; height:1px; background:#E4E4E1;">
+              <div data-draw="x" style="position:absolute; inset:0; background:#FF6F31; transform-origin:left center; transform:scaleX(0);"></div>
+            </div>
+            <sc-for list="{{ ciclo }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative; display:flex; flex-direction:column; gap:20px;">
+                <span style="width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <h3 style="margin:0; font-size:26px; line-height:1.15; font-weight:500; letter-spacing:-0.015em; max-width:280px;">{{ s.t }}</h3>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative; display:flex; flex-direction:column; gap:36px; padding-left:76px;">
+            <div aria-hidden="true" style="position:absolute; left:27px; top:28px; bottom:28px; width:1px; background:#E4E4E1;">
+              <div data-draw="y" style="position:absolute; inset:0; background:#FF6F31; transform-origin:center top; transform:scaleY(0);"></div>
+            </div>
+            <sc-for list="{{ ciclo }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative; min-height:56px; display:flex; align-items:center;">
+                <span style="position:absolute; left:-76px; top:0; width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">{{ s.t }}</h3>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-equipo" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+        <div style="display:flex; flex-direction:column; gap:20px; max-width:860px;">
+          <h2 id="t-equipo" data-reveal="1" style="margin:0; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; text-wrap:balance;">No es solo una WebApp. Es un equipo a tu lado.</h2>
+          <p data-reveal="1" style="margin:0; font-size:clamp(18px, 1.8vw, 21px); line-height:1.55; color:#6F6F6F;">La implementamos en 60 días y después seguimos contigo, todo el año.</p>
+        </div>
+        <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px;">
+            <div aria-hidden="true" style="position:absolute; left:28px; right:calc(33.33% - 28px); top:27px; height:1px; background:#E4E4E1;">
+              <div data-draw="x" style="position:absolute; inset:0; background:#FF6F31; transform-origin:left center; transform:scaleX(0);"></div>
+            </div>
+            <sc-for list="{{ acomp }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative; display:flex; flex-direction:column; gap:24px;">
+                <span style="width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <div data-reveal="1" style="flex:1; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; padding:32px; display:flex; flex-direction:column; gap:12px; box-shadow:0 20px 50px rgba(47,47,47,0.06);">
+                  <h3 style="margin:0; font-size:24px; line-height:1.2; font-weight:500; letter-spacing:-0.015em; text-wrap:balance;">{{ s.t }}</h3>
+                  <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F; text-wrap:pretty;">{{ s.d }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative; display:flex; flex-direction:column; gap:28px; padding-left:76px;">
+            <div aria-hidden="true" style="position:absolute; left:27px; top:28px; bottom:28px; width:1px; background:#E4E4E1;">
+              <div data-draw="y" style="position:absolute; inset:0; background:#FF6F31; transform-origin:center top; transform:scaleY(0);"></div>
+            </div>
+            <sc-for list="{{ acomp }}" as="s" hint-placeholder-count="3">
+              <div style="position:relative;">
+                <span style="position:absolute; left:-76px; top:0; width:56px; height:56px; border-radius:999px; background:#FFFFFF; border:1px solid #FF6F31; display:grid; place-items:center; font-family:var(--font-mono); font-size:15px; color:#C4430F;">{{ s.n }}</span>
+                <div data-reveal="1" style="background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; padding:28px; display:flex; flex-direction:column; gap:12px; box-shadow:0 20px 50px rgba(47,47,47,0.06);">
+                  <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">{{ s.t }}</h3>
+                  <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">{{ s.d }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div data-reveal="1" style="margin-top:0px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; width:fit-content; max-width:100%; box-sizing:border-box; padding:10px 24px 10px 10px; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:999px;">
+          <div style="display:flex;"><img src="assets/team/persona-2.png" alt="" width="48" height="48" loading="lazy" style="width:48px; height:48px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);"><img src="assets/team/persona-1.png" alt="" width="48" height="48" loading="lazy" style="width:48px; height:48px; margin-left:-14px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);"></div>
+          <span style="font-size:17px; font-weight:500; color:#2F2F2F;">Te acompañan sus socios, no un ticket.</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Beneficios" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:20px;">
+        <div data-reveal="1" style="display:flex;">
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" tone="highlight" notch="{{ true }}" style="{{ cardFill }}" hint-size="100%,220px">
+            <div style="display:flex; flex-direction:column; gap:48px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg>
+              <h3 style="margin:0; font-size:28px; line-height:1.12; font-weight:500; letter-spacing:-0.02em;">Escenarios en minutos</h3>
+            </div>
+          </x-import>
+        </div>
+        <div data-reveal="1" style="display:flex;">
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" tone="solid" style="{{ cardFill }}" hint-size="100%,220px">
+            <div style="display:flex; flex-direction:column; gap:48px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F2F2F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+              <h3 style="margin:0; font-size:28px; line-height:1.12; font-weight:500; letter-spacing:-0.02em;">Budget, forecast y real en una vista</h3>
+            </div>
+          </x-import>
+        </div>
+        <div data-reveal="1" style="display:flex;">
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" tone="solid" style="{{ cardFill }}" hint-size="100%,220px">
+            <div style="display:flex; flex-direction:column; gap:48px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F2F2F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
+              <h3 style="margin:0; font-size:28px; line-height:1.12; font-weight:500; letter-spacing:-0.02em;">Trazabilidad total</h3>
+            </div>
+          </x-import>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-esp" style="padding:0 24px clamp(72px, 10vw, 128px);">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-esp" data-reveal="1" style="margin:0 0 48px; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">25 años en esto.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:20px;">
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" notch="{{ true }}" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">01</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">25 años en procesos de RRHH y Finanzas.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Conocemos el presupuesto salarial de grandes empresas desde dentro.</p>
+              </div>
+            </x-import>
+          </div>
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">02</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">Cambios en días, no en meses.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Trabajamos en ciclos cortos: una funcionalidad nueva llega rápido.</p>
+              </div>
+            </x-import>
+          </div>
+          <div data-reveal="1" style="display:flex;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.GlassCard" style="{{ cardFill }}" hint-size="100%,240px">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <span style="font-family:var(--font-mono); font-size:13px; color:#C4430F;">03</span>
+                <h3 style="margin:0; font-size:24px; line-height:1.18; font-weight:500; letter-spacing:-0.015em;">Cerca de quienes lo usan.</h3>
+                <p style="margin:0; font-size:16px; line-height:1.6; color:#6F6F6F;">Acompañamos a los equipos que operan la plataforma todos los días, no solo a la dirección.</p>
+              </div>
+            </x-import>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-ia" style="padding:clamp(72px, 10vw, 128px) 24px; background:#F1F1EE;">
+      <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:clamp(40px, 6vw, 88px); align-items:center;">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <span data-reveal="1" style="align-self:flex-start; font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F; background:#FFF3EC; border:1px solid rgba(255,111,49,0.28); padding:7px 12px; border-radius:999px;">Nuevo en la WebApp</span>
+          <h2 id="t-ia" data-reveal="1" style="margin:0; font-size:clamp(38px, 5vw, 60px); line-height:1.02; font-weight:400; letter-spacing:-0.035em;">Pregúntale a tu presupuesto.</h2>
+          <p data-words="1" style="margin:0; font-size:clamp(20px, 2.2vw, 28px); line-height:1.4; letter-spacing:-0.012em; color:#2F2F2F; text-wrap:pretty;">El analista de IA arma gráficos, comparativos y resúmenes ejecutivos a pedido, sobre tus escenarios de budget y forecast. Sin esperar un reporte fijo.</p>
+        </div>
+        <div data-reveal="1" style="background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; box-shadow:0 20px 50px rgba(47,47,47,0.06); overflow:hidden;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; border-bottom:1px solid #E4E4E1;">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6F6F6F;">aREDPI WebApp · Analista de IA</span>
+            <span style="display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#2E7D4F;"><span style="width:6px; height:6px; border-radius:999px; background:#2E7D4F;"></span>En línea</span>
+          </div>
+          <div style="padding:clamp(18px, 3vw, 28px); display:flex; flex-direction:column; gap:18px; background:#FAFAF8;">
+            <div style="align-self:flex-end; max-width:82%; background:#2F2F2F; color:#FFFFFF; padding:14px 18px; border-radius:18px 18px 4px 18px; font-size:15px; line-height:1.45;">¿Qué escenario tiene más desvío en México este trimestre?</div>
+            <div style="background:#FFFFFF; border:1px solid #E4E4E1; border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:18px; max-width:94%;">
+              <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#6F6F6F;">Desvío vs. budget · México · T3</span>
+                <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#C4430F;">5 escenarios</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:12px; align-items:end; height:132px; border-bottom:1px solid #E4E4E1; padding:0 4px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">1,2 %</span><span style="width:100%; max-width:34px; height:30%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">2,1 %</span><span style="width:100%; max-width:34px; height:48%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#C4430F; font-weight:500;">4,2 %</span><span style="width:100%; max-width:34px; height:82%; background:linear-gradient(180deg, #FF6F31, #F0501F); border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">0,8 %</span><span style="width:100%; max-width:34px; height:20%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px; justify-content:flex-end; height:100%;"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F;">1,6 %</span><span style="width:100%; max-width:34px; height:38%; background:#FFE0CF; border-radius:6px 6px 0 0;"></span></div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:12px; margin-top:-10px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.04em; color:#6F6F6F; text-align:center;"><span>ESC 1</span><span>ESC 2</span><span style="color:#C4430F;">ESC 3</span><span>ESC 4</span><span>ESC 5</span></div>
+              <p data-type="1" style="margin:0; font-size:15px; line-height:1.55; color:#2F2F2F;">El escenario 3 es el de mayor desvío: +4,2 % sobre el budget del trimestre. Lo explica el ajuste de convenio de abril en Operaciones.</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:999px; padding:6px 6px 6px 18px;">
+              <span style="flex:1; font-size:14px; color:#6F6F6F;">Pregunta sobre tus escenarios…</span>
+              <span style="width:36px; height:36px; border-radius:999px; background:linear-gradient(135deg, #FF6F31, #F0501F); color:#FFFFFF; display:grid; place-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-features" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto;">
+        <h2 id="t-features" data-reveal="1" style="margin:0 0 48px; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Todo lo que necesitas, en un solo lugar.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:1px; background:#E4E4E1; border:1px solid #E4E4E1; border-radius:24px; overflow:hidden;">
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Todo en un solo lugar</h3>
+          </div>
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Multi-país y multi-moneda</h3>
+          </div>
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Validación por roles</h3>
+          </div>
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Reportes para Dirección</h3>
+          </div>
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Revisiones mensuales</h3>
+          </div>
+          <div data-reveal="1" style="background:#FFFFFF; padding:36px 32px; display:flex; flex-direction:column; gap:28px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4430F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg>
+            <h3 style="margin:0; font-size:22px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Implementación en 60 días</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="La WebApp en números" style="padding:0 clamp(12px, 2vw, 24px);">
+      <div style="max-width:1320px; margin:0 auto; border-radius:32px; background:linear-gradient(135deg, #FF6F31 0%, #F0501F 100%); color:#FFFFFF; padding:clamp(48px, 6vw, 80px) clamp(24px, 5vw, 72px); box-sizing:border-box; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:40px 32px;">
+        <div style="display:flex; flex-direction:column; gap:12px;"><span data-count="1" style="font-family:var(--font-mono); font-size:clamp(52px, 6vw, 76px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums;">80 %</span><span style="font-size:17px; font-weight:600; line-height:1.35;">menos de tiempo en el armado</span></div>
+        <div style="display:flex; flex-direction:column; gap:12px;"><span data-count="1" style="font-family:var(--font-mono); font-size:clamp(52px, 6vw, 76px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums;">5</span><span style="font-size:17px; font-weight:600; line-height:1.35;">escenarios en simultáneo</span></div>
+        <div style="display:flex; flex-direction:column; gap:12px;"><span data-count="1" style="font-family:var(--font-mono); font-size:clamp(52px, 6vw, 76px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums;">60</span><span style="font-size:17px; font-weight:600; line-height:1.35;">días de implementación</span></div>
+        <div style="display:flex; flex-direction:column; gap:12px;"><span data-count="1" style="font-family:var(--font-mono); font-size:clamp(52px, 6vw, 76px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums;">9</span><span style="font-size:17px; font-weight:600; line-height:1.35;">países</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-int" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:40px; align-items:center; text-align:center;">
+        <h2 id="t-int" data-reveal="1" style="margin:0; font-size:clamp(30px, 3.6vw, 44px); line-height:1.08; font-weight:400; letter-spacing:-0.025em;">Integraciones.</h2>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; justify-content:center; gap:12px;">
+          <sc-for list="{{ integraciones }}" as="i" hint-placeholder-count="5">
+            <li data-reveal="1" style="padding:14px 24px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; font-size:17px; font-weight:500;">{{ i }}</li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-test" style="padding:clamp(72px, 10vw, 128px) 0; background:#F1F1EE; overflow:hidden;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 24px; box-sizing:border-box;">
+        <h2 id="t-test" data-reveal="1" style="margin:0 0 48px; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Lo que dicen quienes lo usan.</h2>
+      </div>
+      <!-- Carrusel: los testimonios salen del array TESTIMONIOS de la lógica; para sumar uno, agregar un ítem. -->
+      <div ref="{{ tRef }}" role="region" aria-roledescription="carrusel" aria-label="Testimonios" tabindex="0" onMouseEnter="{{ tPause }}" onMouseLeave="{{ tResume }}" onFocus="{{ tPause }}" onBlur="{{ tResume }}" onTouchStart="{{ tTouchStart }}" onTouchEnd="{{ tTouchEnd }}" onKeyDown="{{ tKey }}" style="outline:none;">
+        <div style="max-width:760px; margin:0 auto; padding:0 24px; box-sizing:border-box;">
+          <div style="display:grid;">
+            <sc-for list="{{ tRing }}" as="t" hint-placeholder-count="3">
+              <figure aria-hidden="{{ t.ariaHidden }}" style="grid-area:1 / 1; margin:0; box-sizing:border-box; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:24px; padding:clamp(28px, 4vw, 48px); box-shadow:0 20px 50px rgba(47,47,47,0.06); display:flex; flex-direction:column; gap:24px; transform:{{ t.tf }}; opacity:{{ t.op }}; filter:{{ t.blur }}; z-index:{{ t.z }}; pointer-events:{{ t.pe }}; transition:{{ t.trans }};">
+                <span aria-hidden="true" style="display:block; height:40px; font-family:var(--font-mono); font-size:88px; line-height:0.9; color:#FF6F31;">“</span>
+                <blockquote style="margin:0; flex:1;">
+                  <p style="margin:0; font-family:var(--font-sans); font-size:clamp(22px, 2.2vw, 26px); line-height:1.42; letter-spacing:-0.012em; color:#2F2F2F; text-wrap:pretty;"><sc-for list="{{ t.words }}" as="w" hint-placeholder-count="20"><span style="color:{{ w.c }}; transition:color 260ms ease {{ w.d }};">{{ w.w }}</span></sc-for></p>
+                </blockquote>
+                <figcaption style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding-top:24px; border-top:1px solid #E4E4E1;">
+                  <sc-if value="{{ t.hasFoto }}" hint-placeholder-val="{{ false }}"><img src="{{ t.foto }}" alt="{{ t.nombre }}" width="56" height="56" style="flex:none; width:56px; height:56px; border-radius:999px; box-shadow:0 0 0 2px #FFF3EC; filter:grayscale(100%) contrast(1.08); transition:filter 300ms ease;" style-hover="filter:grayscale(0%) contrast(1);"></sc-if>
+                  <sc-if value="{{ t.noFoto }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:none; width:56px; height:56px; border-radius:999px; background:#FFF3EC; box-shadow:0 0 0 2px #FFF3EC; display:grid; place-items:center; font-family:var(--font-mono); font-size:17px; font-weight:500; color:#C4430F;">{{ t.ini }}</span></sc-if>
+                  <span style="display:flex; flex-direction:column; gap:4px; flex:1; min-width:160px;">
+                    <span style="font-size:17px; font-weight:500; color:#2F2F2F;">{{ t.nombre }}</span>
+                    <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; color:#C4430F;">{{ t.pie }}</span>
+                  </span>
+                  <sc-if value="{{ t.hasLogo }}" hint-placeholder-val="{{ false }}"><img src="{{ t.logo }}" alt="{{ t.empresa }}" width="536" height="235" style="height:52px; width:auto; filter:grayscale(100%); mix-blend-mode:multiply; opacity:0.7;"></sc-if>
+                </figcaption>
+              </figure>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-top:40px; padding:0 24px;">
+          <button type="button" onClick="{{ tPrev }}" aria-label="Testimonio anterior" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; font-family:var(--font-mono); font-size:18px; color:#2F2F2F; cursor:pointer;" style-hover="border-color:#6F6F6F;">←</button>
+          <div style="display:flex; align-items:center;">
+            <sc-for list="{{ tDots }}" as="d" hint-placeholder-count="3">
+              <button type="button" onClick="{{ d.go }}" aria-label="{{ d.label }}" aria-current="{{ d.cur }}" style="height:44px; min-width:24px; padding:0 4px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer;">
+                <span style="position:relative; display:block; width:{{ d.w }}; height:6px; border-radius:999px; background:{{ d.bg }}; overflow:hidden; transition:width 500ms cubic-bezier(.22,1,.36,1);"><span data-tfill="{{ d.fill }}" style="position:absolute; inset:0; background:#FF6F31; transform-origin:left center; transform:scaleX(0);"></span></span>
+              </button>
+            </sc-for>
+          </div>
+          <button type="button" onClick="{{ tNext }}" aria-label="Testimonio siguiente" style="width:48px; height:48px; border-radius:999px; border:1px solid #E4E4E1; background:#FFFFFF; font-family:var(--font-mono); font-size:18px; color:#2F2F2F; cursor:pointer;" style-hover="border-color:#6F6F6F;">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-faq" style="padding:clamp(72px, 10vw, 128px) 24px;">
+      <div style="max-width:880px; margin:0 auto;">
+        <h2 id="t-faq" data-reveal="1" style="margin:0 0 48px; font-size:clamp(34px, 4.6vw, 56px); line-height:1.04; font-weight:400; letter-spacing:-0.03em;">Preguntas frecuentes.</h2>
+        <div style="border-top:1px solid #E4E4E1;">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+            <div style="border-bottom:1px solid #E4E4E1;">
+              <h3 style="margin:0;">
+                <button type="button" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" id="{{ f.btnId }}" style="width:100%; display:flex; justify-content:space-between; align-items:center; gap:24px; padding:24px 0; background:none; border:none; cursor:pointer; text-align:left; font-family:var(--font-sans); font-size:clamp(18px, 1.8vw, 21px); font-weight:500; line-height:1.3; color:#2F2F2F;" style-hover="color:#C4430F;">
+                  <span>{{ f.q }}</span>
+                  <span aria-hidden="true" style="flex:none; width:36px; height:36px; border-radius:999px; border:1px solid #E4E4E1; display:grid; place-items:center; color:#C4430F; background:#FFFFFF; transform:rotate({{ f.rot }}); transition:transform 400ms cubic-bezier(.22,1,.36,1);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+                  </span>
+                </button>
+              </h3>
+              <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 56px 28px 0;">
+                  <p style="margin:0; font-size:17px; line-height:1.65; color:#6F6F6F; text-wrap:pretty;">{{ f.a }}</p>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-cta" style="padding:0 clamp(12px, 2vw, 24px) clamp(72px, 10vw, 128px);">
+      <div style="position:relative; max-width:1320px; margin:0 auto; border-radius:32px; overflow:hidden; min-height:540px; display:flex; align-items:center; padding:clamp(24px, 5vw, 72px); box-sizing:border-box; border:1px solid #E4E4E1;">
+        <img src="assets/home-v2-frame-1.png" alt="" aria-hidden="true" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:78% 40%;">
+        <div data-reveal="1" style="position:relative; width:100%; max-width:620px; box-sizing:border-box; background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); border-radius:24px; padding:clamp(28px, 4vw, 48px); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px rgba(47,47,47,0.06); display:flex; flex-direction:column; gap:28px;">
+          <h2 id="t-cta" style="margin:0; font-size:clamp(32px, 4.4vw, 52px); line-height:1.04; font-weight:400; letter-spacing:-0.03em; text-wrap:balance;">Muéstranos cómo lo arman hoy. Te mostramos cómo podría ser.</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una reunión</x-import></span>
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" href="Costo-Presupuesto.dc.html" hint-size="290px,52px">Calcula cuánto te cuesta hoy</x-import>
+          </div>
+          <p style="margin:0; font-size:15px; line-height:1.55; color:#6F6F6F;">Implementación + cuota mensual. Cotizamos según el alcance de cada empresa.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#F1F1EE; padding:72px 24px 40px; border-top:1px solid #E4E4E1;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:40px;">
+        <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="64" height="64" loading="lazy" style="width:64px; height:64px; mix-blend-mode:multiply;">
+        <nav aria-label="Pie" style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="Home.dc.html#especialistas" style="color:#2F2F2F;" style-hover="color:#C4430F;">Nosotros</a>
+          <a href="Home.dc.html#soluciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Soluciones</a>
+          <a href="Home.dc.html#como-trabajamos" style="color:#2F2F2F;" style-hover="color:#C4430F;">Enfoque</a>
+          <a href="https://aredpi.com/blog" style="color:#2F2F2F;" style-hover="color:#C4430F;">Blog</a>
+          <a href="https://aredpi.com/terminos-y-condiciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Términos y condiciones</a>
+        </nav>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="mailto:info@aredpi.com" style="color:#2F2F2F;" style-hover="color:#C4430F;">info@aredpi.com</a>
+          <a href="tel:+543484428046" style="color:#2F2F2F; font-family:var(--font-mono); font-size:14px;" style-hover="color:#C4430F;">+54 348 4428046</a>
+          <a href="https://wa.me/543484428046" style="color:#2F2F2F;" style-hover="color:#C4430F;">WhatsApp</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <!-- TODO: confirmar URLs de redes -->
+          <a href="https://www.linkedin.com/company/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">LinkedIn</a>
+          <a href="https://www.instagram.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Instagram</a>
+          <a href="https://www.facebook.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Facebook</a>
+        </div>
+      </div>
+      <p style="margin:0; padding-top:24px; border-top:1px solid #E4E4E1; font-size:13px; color:#6F6F6F;">© aREDPI. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <dc-import name="Calificador" open="{{ qOpen }}" on-close="{{ closeQ }}" source="calificador" hint-size="0px,0px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof innerWidth === 'number' ? innerWidth : 1280, qOpen: false, menu: false, faq: -1, tIdx: 0, tSeen: false, tPaused: false,
+    reduce: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches };
+  tRef = React.createRef(); tElapsed = 0; tLast = 0; lastActive = 0;
+  canvasRef = React.createRef();
+
+  // Testimonios reales y textuales. Las tarjetas con cita vacía no se muestran; para sumar uno, agregar un ítem.
+  static TESTIMONIOS = [
+    { cita: 'Pasamos de caos y manualidad, a un proceso prolijo y automatizado. Hoy todo está en un solo lugar. Podemos enfocarnos en analizar y no en calcular.', nombre: 'Patricia Maidana', cargo: 'Sr. Manager HR', empresa: 'Cirion', logo: 'assets/clientes/cirion.png', foto: '' },
+    { cita: 'Aredpi nos ha permitido mejorar significativamente los tiempos de entrega y simular diversos escenarios alineados a la necesidad de la compañía.', nombre: 'Jorge Del Águila', cargo: '' /* TODO: cargo a confirmar */, empresa: 'Soldexa Perú', logo: 'assets/clientes/soldexa.png', foto: '' },
+    { cita: 'Hemos implementado PMO en el año 2022, y esto nos ha permitido reducir drásticamente los tiempos dedicados a la elaboración del presupuesto anual, y a su vez hemos ganado mucho en precisión y confiabilidad de los datos que proveemos al área Financiera y casa matriz. Excelente desarrollo, plataforma y servicio.', nombre: 'Mario Nigro', cargo: 'Ex Gerente de RR. HH.', empresa: 'Eurofarma', logo: '', foto: '' }
+  ];
+  tBase() { return this.constructor.TESTIMONIOS.filter(t => t.cita && t.cita.trim()); }
+  tRing() { const b = this.tBase(); let r = []; if (!b.length) return r; while (r.length < 5) r = r.concat(b); return r; }
+  tGo(dir) { const len = this.tRing().length; if (!len) return; this.tElapsed = 0; this.setState(s => ({ tIdx: (s.tIdx + dir + len) % len })); }
+  tLoop = (now) => {
+    const dt = this.tLast ? Math.min(100, now - this.tLast) : 0; this.tLast = now;
+    const el = this.tRef.current;
+    if (el) {
+      if (!this.state.tSeen) { const r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.8 && r.bottom > 0) this.setState({ tSeen: true }); }
+      else if (!this.state.reduce && !this.state.tPaused) { this.tElapsed += dt; if (this.tElapsed >= 6000) this.tGo(1); }
+      const k = this.state.reduce ? 1 : Math.min(1, this.tElapsed / 6000);
+      el.querySelectorAll('[data-tfill]').forEach(f => { f.style.transform = 'scaleX(' + (f.getAttribute('data-tfill') === '1' ? k : 0).toFixed(3) + ')'; });
+    }
+    this.tRaf = requestAnimationFrame(this.tLoop);
+  };
+  carouselVals() {
+    const base = this.tBase(), ring = this.tRing(), len = ring.length, n = base.length, a = this.state.tIdx, reduce = this.state.reduce;
+    const norm = x => { let d = ((x % len) + len) % len; if (d > len / 2) d -= len; return d; };
+    const E = 'cubic-bezier(.22,1,.36,1)';
+    return {
+      tRef: this.tRef,
+      tRing: ring.map((t, i) => {
+        const d = norm(i - a), dp = norm(i - this.lastActive), on = d === 0, vis = Math.abs(d) <= 1;
+        const cd = Math.max(-2, Math.min(2, d)), reveal = reduce || (on && this.state.tSeen);
+        const parts = t.nombre.split(/\s+/);
+        return { nombre: t.nombre, empresa: t.empresa, logo: t.logo || '', hasLogo: !!t.logo, foto: t.foto || '', hasFoto: !!t.foto, noFoto: !t.foto,
+          ini: (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase(),
+          pie: [t.cargo, t.empresa].filter(Boolean).join(' · '),
+          words: t.cita.trim().split(/\s+/).map((w, k) => ({ w: w + ' ', c: reveal ? '#2F2F2F' : '#C9C9C5', d: reveal && !reduce ? (k * 25) + 'ms' : '0ms' })),
+          tf: 'translateX(calc(' + cd + ' * (100% + 24px))) scale(' + (on ? 1 : 0.88) + ')',
+          op: on ? 1 : vis ? 0.45 : 0, blur: on ? 'none' : 'blur(2px)', z: on ? 2 : 1, pe: on ? 'auto' : 'none', ariaHidden: on ? 'false' : 'true',
+          trans: reduce || Math.abs(d - dp) > 1 ? 'none' : 'transform 700ms ' + E + ', opacity 700ms ' + E + ', filter 700ms ' + E };
+      }),
+      tDots: base.map((_, k) => { const on = k === a % n; return { w: on ? '32px' : '8px', bg: on ? '#FFE0CF' : '#D6D6D2', fill: on ? '1' : '0', cur: on ? 'true' : 'false', label: 'Ir al testimonio ' + (k + 1),
+        go: () => { this.tElapsed = 0; this.setState(s => ({ tIdx: s.tIdx - (s.tIdx % n) + k })); } }; }),
+      tPrev: () => this.tGo(-1), tNext: () => this.tGo(1),
+      tPause: () => this.setState({ tPaused: true }), tResume: () => this.setState({ tPaused: false }),
+      tTouchStart: e => { this.tx0 = e.touches[0].clientX; },
+      tTouchEnd: e => { const dx = e.changedTouches[0].clientX - (this.tx0 || 0); if (Math.abs(dx) > 40) this.tGo(dx < 0 ? 1 : -1); },
+      tKey: e => { if (e.key === 'ArrowRight') this.tGo(1); if (e.key === 'ArrowLeft') this.tGo(-1); }
+    };
+  }
+  static LOGOS = [['toyota','Toyota Boshoku'],['nestle','Nestlé'],['novartis','Novartis'],['sanofi','Sanofi'],['philip-morris','Philip Morris International'],['nespresso','Nespresso'],['supervielle','Supervielle'],['tgn','TGN'],['cirion','Cirion'],['soldexa','Soldexa'],['conarco','Conarco'],['carestino','Carestino'],['craveri','Craveri'],['eichler','Eichler'],['esab','ESAB'],['finadiet','Finadiet'],['fischer','fischer'],['garro-fabril','Garro Fabril'],['imvi','IMVI Laboratorios'],['la-esquina-del-neumatico','La Esquina del Neumático'],['massalin','Massalin Particulares'],['puelche','Puelche'],['sar','SAR Sewtech Argentina'],['solution-box','Solution Box'],['virulana','Virulana'],['west-arco-esab','West Arco']];
+  logoVals() {
+    const L = this.constructor.LOGOS.map(([f, a]) => ({ src: 'assets/clientes/' + f + '.png', alt: a, dup: 'false' }));
+    const half = Math.ceil(L.length / 2), dup = arr => arr.concat(arr.map(l => ({ ...l, alt: '', dup: 'true' })));
+    return { logosRow1: dup(L.slice(0, half)), logosRow2: dup(L.slice(half)), logosAll: L, logosMotion: !this.state.reduce, logosStatic: !!this.state.reduce };
+  }
+  static FAQ = [
+    ['¿Es una solución enfocada solo en una industria?', 'No. Está preparada para empresas de más de 1.000 colaboradores de cualquier industria: banca, pharma, manufactura, retail, oil & gas, logística y más. En la implementación se adapta a las particularidades de cada una.'],
+    ['¿Qué pasa si la persona que arma el presupuesto cambia de rol o se va?', 'La lógica del presupuesto vive en el sistema, no en la cabeza de una persona. Así se elimina el riesgo operativo por rotación.'],
+    ['¿Tengo que ser experto en sistemas para usarla?', 'No. Está pensada para quienes arman el presupuesto de gastos salariales, no para IT. El equipo actual la opera con menos esfuerzo.'],
+    ['¿Se pueden hacer presupuestos en dos o más monedas?', 'Sí. La consolidación multi-moneda, multi-país y multi-convenio es una de las funcionalidades centrales.'],
+    ['¿Se integra con SAP, SuccessFactors o Workday?', 'Sí. Se integra con los principales sistemas corporativos para interfaces y reportes, incluido Power BI.'],
+    ['¿Es un sistema enlatado o se adapta a cada compañía?', 'No es un enlatado. Se parametriza con las reglas de cada empresa, así que el resultado es una solución a medida.'],
+    ['¿Cómo se justifica la inversión ante el CFO?', 'Preparamos un business case específico con los ahorros concretos, el impacto en el riesgo operativo y el payback estimado.'],
+    ['¿Qué pasa después de la implementación?', 'Seguimos contigo. Te acompañamos en cada revisión del forecast, armamos nuevas comparativas y hacemos los ajustes que tu compañía necesite: nuevos convenios, cambios de política o nuevos países.'],
+    ['¿Cuenta con IA integrada?', 'Sí. En la versión 2026 se suman agentes inteligentes que analizan la información del presupuesto.']
+  ];
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: innerWidth });
+    addEventListener('resize', this.onResize);
+    const boot = () => {
+      if (!window.AredpiMotion || !window.initFondoBudget) return (this.bootT = setTimeout(boot, 50));
+      AredpiMotion.start();
+      initFondoBudget(this.canvasRef.current);
+    };
+    boot();
+    this.tRaf = requestAnimationFrame(this.tLoop);
+  }
+  componentDidUpdate() { if (this.__pt !== this.state.tIdx) { this.__pt = this.state.tIdx; this.lastActive = this.state.tIdx; } }
+  componentWillUnmount() { removeEventListener('resize', this.onResize); clearTimeout(this.bootT); cancelAnimationFrame(this.tRaf); }
+
+  renderVals() {
+    const isDesk = this.state.w >= 1024;
+    return {
+      isDesk, isMobile: !isDesk,
+      canvasRef: this.canvasRef,
+      heroAlign: isDesk ? 'center' : 'flex-start',
+      heroPad: isDesk ? '120px 24px 80px' : '112px 24px 0',
+      cardFill: { width: '100%' },
+      ...this.logoVals(),
+      dolores: ['Versiones de Excel', 'Retrabajo en cadena', 'Dependencia de una o dos personas', 'Falta de trazabilidad', 'Escenarios que tardan días'].map((t, i) => ({ n: '0' + (i + 1), t })),
+      ciclo: [{ n: '01', t: 'Arma el budget' }, { n: '02', t: 'Revisa el forecast cada mes' }, { n: '03', t: 'Explica cada desvío' }],
+      acomp: [
+        { n: '01', t: 'Implementación en 60 días.', d: 'Configuramos la WebApp con tus datos, tus áreas y tus países, y capacitamos a tu equipo.' },
+        { n: '02', t: 'Hecha a la medida de tu compañía.', d: 'Se adapta a tus convenios colectivos, tus políticas salariales y las particularidades de cada país en el que operas.' },
+        { n: '03', t: 'Soporte después de implementar.', d: 'Un equipo disponible para las revisiones del forecast, nuevas comparativas y los cambios que necesites durante el año.' }
+      ],
+      integraciones: ['SAP', 'SuccessFactors', 'Workday', 'Power BI', 'Otros HRIS'],
+      ...this.carouselVals(),
+      faqs: this.constructor.FAQ.map(([q, a], i) => ({
+        q, a, open: this.state.faq === i, expanded: this.state.faq === i ? 'true' : 'false', rot: this.state.faq === i ? '45deg' : '0deg',
+        panelId: 'faq-p-' + i, btnId: 'faq-b-' + i,
+        toggle: () => this.setState(s => ({ faq: s.faq === i ? -1 : i }))
+      })),
+      qOpen: this.state.qOpen,
+      openQ: () => this.setState({ qOpen: true }),
+      openQFromMenu: () => this.setState({ menu: false, qOpen: true }),
+      closeQ: () => this.setState({ qOpen: false }),
+      menuOpen: this.state.menu && !isDesk,
+      menuAria: this.state.menu ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu }))
+    };
+  }
+}
+</script>
+</body>
+</html>

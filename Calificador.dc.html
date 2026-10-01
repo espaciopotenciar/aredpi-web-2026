@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/base.css">
+  <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/styles.css">
+  <script src="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/_ds_bundle.js"></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="aredpi-site.js"></script>
+</helmet>
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ onBackdrop }}" style="position:{{ pos }}; inset:0; z-index:200; background:rgba(47,47,47,0.22); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; padding:max(16px, 5vh) 12px 16px; overflow-y:auto; box-sizing:border-box; font-family:var(--font-sans); color:var(--ink);">
+    <div role="dialog" aria-modal="true" aria-labelledby="calif-titulo" ref="{{ panelRef }}" onClick="{{ stop }}" style="position:relative; width:100%; max-width:{{ panelMax }}; box-sizing:border-box; background:rgba(255,255,255,0.86); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); border-radius:24px; box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 30px 80px rgba(47,47,47,0.14); padding:24px clamp(20px, 4vw, 40px) 36px; display:flex; flex-direction:column; gap:28px; transition:max-width 500ms cubic-bezier(.22,1,.36,1);">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ back }}" aria-label="Volver a la pregunta anterior" style="width:44px; height:44px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink); display:grid; place-items:center; cursor:pointer;" style-hover="border-color:var(--ink-muted);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+            </button>
+          </sc-if>
+          <span style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-muted);">{{ stepLabel }}</span>
+        </div>
+        <button type="button" onClick="{{ close }}" aria-label="Cerrar" style="width:44px; height:44px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink); display:grid; place-items:center; cursor:pointer;" style-hover="border-color:var(--ink-muted);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+      <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progressNum }}" style="height:3px; background:var(--border); border-radius:999px; overflow:hidden; margin-top:-12px;">
+        <div style="height:100%; width:{{ progress }}; background:linear-gradient(90deg, #FF6F31, #F0501F); border-radius:999px; transition:width 500ms cubic-bezier(.22,1,.36,1);"></div>
+      </div>
+
+      <sc-if value="{{ isQuestion }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em; text-wrap:pretty;">{{ q.title }}</h2>
+          <div role="radiogroup" aria-labelledby="calif-titulo" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+            <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="4">
+              <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.OptionChip" label="{{ o.label }}" selected="{{ o.selected }}" on-click="{{ o.pick }}" hint-size="100%,60px"></x-import>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isDatos }}" hint-placeholder-val="{{ false }}">
+        <form onSubmit="{{ submit }}" novalidate="novalidate" style="display:flex; flex-direction:column; gap:22px;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em;">¿A quién le escribimos?</h2>
+            <p style="margin:0; font-size:16px; line-height:1.55; color:var(--ink-muted);">Solo tu nombre y tu correo de la empresa.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="calif-nombre" style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-muted);">Nombre y apellido</label>
+            <input id="calif-nombre" type="text" autocomplete="name" value="{{ nombre }}" onInput="{{ onNombre }}" placeholder="Nombre y apellido" style="height:54px; padding:0 16px; border-radius:12px; border:1px solid var(--border); background:var(--surface); font-family:var(--font-sans); font-size:16px; color:var(--ink); outline:none; box-sizing:border-box; width:100%;" style-focus="border-color:#FF6F31; box-shadow:0 0 0 3px rgba(255,111,49,0.14);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="calif-email" style="font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-muted);">Correo corporativo</label>
+            <input id="calif-email" type="email" inputmode="email" autocomplete="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="nombre@tuempresa.com" aria-invalid="{{ emailInvalidAttr }}" aria-describedby="calif-email-msg" style="height:54px; padding:0 16px; border-radius:12px; border:1px solid {{ emailBorder }}; background:var(--surface); font-family:var(--font-sans); font-size:16px; color:var(--ink); outline:none; box-sizing:border-box; width:100%;" style-focus="box-shadow:0 0 0 3px rgba(255,111,49,0.14);">
+            <span id="calif-email-msg" role="{{ emailMsgRole }}" style="font-size:14px; line-height:1.5; color:{{ emailMsgColor }};">{{ emailMsg }}</span>
+          </div>
+          <div aria-hidden="true" style="position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden;">
+            <label for="web_sitio">Sitio web</label>
+            <input id="web_sitio" name="web_sitio" type="text" tabindex="-1" autocomplete="off" value="{{ hp }}" onInput="{{ onHp }}">
+          </div>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" type="submit" disabled="{{ cannotSubmit }}" hint-size="160px,52px">Continuar</x-import>
+            <span style="font-size:13px; line-height:1.5; color:var(--ink-muted);">Te escribimos solo para coordinar la reunión.</span>
+          </div>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ isAgenda }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em; text-wrap:pretty;">Listo, {{ nombreCorto }}. Elige cuándo te queda bien.</h2>
+          <!-- TODO Calendly: al publicar, poner CONFIG.CALENDLY_ACTIVO = true en aredpi-site.js. El widget inline real (data-url) se monta dentro de #calendly-inline y reemplaza este placeholder, con el mismo tamaño. -->
+          <div id="calendly-inline" data-url="https://calendly.com/aredpi_/webapp" style="position:relative; width:100%; min-height:{{ agendaH }}; background:#FFFFFF; border:1px solid #E4E4E1; border-radius:16px; overflow:hidden; box-sizing:border-box;">
+            <div ref="{{ calTargetRef }}" style="position:absolute; inset:0;"></div>
+            <sc-if value="{{ calPlaceholder }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr)); align-items:stretch;">
+                <div style="padding:32px 28px; border-right:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1; display:flex; flex-direction:column; gap:20px;">
+                  <span style="align-self:flex-start; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#6F6F6F; border:1px dashed #D6D6D2; border-radius:999px; padding:5px 10px;">CALENDLY · se conecta al publicar</span>
+                  <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="width:44px; height:44px;">
+                  <div style="display:flex; flex-direction:column; gap:4px;">
+                    <span style="font-size:14px; color:#6F6F6F;">aREDPI</span>
+                    <h3 style="margin:0; font-size:24px; line-height:1.2; font-weight:500; letter-spacing:-0.015em;">Reunión WebApp aREDPI</h3>
+                  </div>
+                  <div style="display:flex; flex-direction:column; gap:12px; font-size:15px; color:#2F2F2F;">
+                    <span style="display:flex; align-items:center; gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6F6F6F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>20 min</span>
+                    <span style="display:flex; align-items:center; gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6F6F6F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>Videollamada</span>
+                  </div>
+                </div>
+                <div style="padding:32px 28px; border-bottom:1px solid #E4E4E1; display:flex; flex-direction:column; gap:20px;">
+                  <h3 style="margin:0; font-size:20px; line-height:1.2; font-weight:500;">Elige día y horario</h3>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                    <span style="font-size:16px; font-weight:500;">Octubre 2026</span>
+                    <div style="display:flex; gap:6px;">
+                      <span aria-hidden="true" style="width:36px; height:36px; border-radius:999px; display:grid; place-items:center; color:#B5B5B1; font-family:var(--font-mono);">←</span>
+                      <span aria-hidden="true" style="width:36px; height:36px; border-radius:999px; display:grid; place-items:center; background:#FFF3EC; color:#C4430F; font-family:var(--font-mono);">→</span>
+                    </div>
+                  </div>
+                  <div style="display:grid; grid-template-columns:repeat(7, minmax(0, 1fr)); gap:6px; text-align:center; align-items:center;">
+                    <sc-for list="{{ calDow }}" as="d" hint-placeholder-count="7"><span style="font-family:var(--font-mono); font-size:11px; color:#6F6F6F; padding-bottom:4px;">{{ d }}</span></sc-for>
+                    <sc-for list="{{ calDays }}" as="c" hint-placeholder-count="34"><button type="button" disabled="{{ c.off }}" onClick="{{ c.pick }}" aria-label="{{ c.label }}" aria-pressed="{{ c.sel }}" style="width:100%; max-width:44px; aspect-ratio:1; justify-self:center; padding:0; border-radius:999px; border:none; background:{{ c.bg }}; color:{{ c.fg }}; font-family:var(--font-mono); font-size:14px; font-weight:{{ c.fw }}; cursor:{{ c.cur }}; visibility:{{ c.vis }};">{{ c.n }}</button></sc-for>
+                  </div>
+                  <span style="font-size:13px; color:#6F6F6F;">Zona horaria: Buenos Aires (GMT-3)</span>
+                </div>
+                <div style="padding:32px 28px; border-left:1px solid #E4E4E1; border-bottom:1px solid #E4E4E1; margin-left:-1px; display:flex; flex-direction:column; gap:12px;">
+                  <span style="font-size:16px; font-weight:500; padding-bottom:8px;">{{ calSelLabel }}</span>
+                  <sc-for list="{{ calSlots }}" as="s" hint-placeholder-count="7">
+                    <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.sel }}" style="height:52px; border-radius:10px; border:1px solid #FF6F31; background:{{ s.bg }}; color:{{ s.fg }}; font-family:var(--font-mono); font-size:15px; font-weight:500; cursor:pointer;">{{ s.t }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Te llega la invitación a tu correo corporativo.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isGracias }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px; align-items:flex-start; padding:12px 0;">
+          <span style="width:52px; height:52px; border-radius:999px; background:var(--orange-soft); color:#C4430F; display:grid; place-items:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+          </span>
+          <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em;">Gracias, recibimos tus datos.</h2>
+          <p style="margin:0; font-size:17px; line-height:1.6; color:var(--ink-muted); max-width:440px; text-wrap:pretty;">Te escribimos por correo con los próximos pasos y material para que veas cómo trabaja la aREDPI WebApp de Budget &amp; Forecast.</p>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" on-click="{{ close }}" hint-size="120px,52px">Cerrar</x-import>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:800,&quot;height&quot;:700},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;source&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;calificador&quot;,&quot;calculadora&quot;],&quot;default&quot;:&quot;calificador&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;calc&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;}}">
+class Component extends DCLogic {
+  calTargetRef = React.createRef();
+  state = { calDay: 6, calSlot: '', calLive: false, i: 0, a: {}, nombre: '', email: '', touched: false, hp: '', phase: 'q', w: typeof innerWidth === 'number' ? innerWidth : 1200 };
+  panelRef = React.createRef();
+  agendaRef = React.createRef();
+
+  static Q = {
+    empleados: { title: '¿Cuántas personas trabajan en tu empresa?', options: ['Hasta 200', '201 a 1.000', '1.001 a 5.000', 'Más de 5.000'] },
+    paises: { title: '¿En cuántos países opera tu empresa?', options: ['1 país', '2 a 3 países', '4 a 9 países', 'Más de 9 países'] },
+    como: { title: '¿Cómo arman hoy el presupuesto salarial?', options: ['Excel', 'Excel + sistema', 'Otro software', 'Sin proceso definido'] },
+    revisiones: { title: '¿Cuántas revisiones de forecast hacen por año?', options: ['Ninguna', '1', '2', '3', '4', '6', '12'] }
+  };
+
+  fromCalc() { return this.props.source === 'calculadora'; }
+  steps() { return this.fromCalc() ? ['empleados', 'paises', 'datos'] : ['empleados', 'paises', 'como', 'revisiones', 'datos']; }
+
+  componentDidMount() {
+    if (this.props.previewStep === 'agenda') this.setState({ phase: 'agenda', nombre: this.props.previewName || '' });
+    this.onKey = e => { if (this.props.open && e.key === 'Escape') this.close(); };
+    this.onResize = () => this.setState({ w: innerWidth });
+    addEventListener('keydown', this.onKey); addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { removeEventListener('keydown', this.onKey); removeEventListener('resize', this.onResize); document.documentElement.style.overflow = ''; }
+  componentDidUpdate(pp, ps) {
+    // El runtime publicado no pasa el estado anterior: lo guardamos a mano.
+    ps = this.__ps || { i: this.state.i, phase: this.state.phase };
+    this.__ps = { i: this.state.i, phase: this.state.phase };
+    pp = pp || {};
+    if (this.props.open && !pp.open) { this.setState({ i: 0, a: {}, touched: false, hp: '', phase: 'q' }); if (!this.props.embedded) document.documentElement.style.overflow = 'hidden'; this.focusFirst(); }
+    if (!this.props.open && pp.open) document.documentElement.style.overflow = '';
+    if (this.props.open && (ps.i !== this.state.i || ps.phase !== this.state.phase)) this.focusFirst();
+    if (this.state.phase === 'agenda' && ps.phase !== 'agenda') this.initCalendly();
+  }
+  focusFirst() { setTimeout(() => { const p = this.panelRef.current; if (!p) return; const el = p.querySelector('[role=radio][aria-checked=true]') || p.querySelector('[role=radio], input:not([tabindex="-1"])'); el && el.focus(); }, 80); }
+
+  close = () => { this.props.onClose && this.props.onClose(); };
+
+  pick(key, val) {
+    this.setState(s => ({ a: { ...s.a, [key]: val } }));
+    clearTimeout(this.adv);
+    this.adv = setTimeout(() => this.setState(s => ({ i: Math.min(s.i + 1, this.steps().length - 1) })), 260);
+  }
+
+  emailStatus() { return window.AREDPI ? AREDPI.emailCheck(this.state.email) : 'format'; }
+
+  answers() {
+    const a = this.state.a, c = this.props.calc || {};
+    return {
+      empleados: a.empleados || '', paises: a.paises || '',
+      como: this.fromCalc() ? (c.como_arman_budget || '') : (a.como || ''),
+      revisiones: this.fromCalc() ? String(c.revisiones_anio ?? '') : (a.revisiones || '')
+    };
+  }
+
+  submit = async (e) => {
+    e && e.preventDefault && e.preventDefault();
+    this.setState({ touched: true });
+    if (this.emailStatus() !== 'ok' || !this.state.nombre.trim()) return; // se valida de nuevo al enviar
+    const ans = this.answers(), nombre = this.state.nombre.trim(), email = this.state.email.trim();
+    const payload = AREDPI.buildPayload({
+      origen: this.fromCalc() ? 'calculadora' : 'calificador', nombre, email,
+      empleados: ans.empleados, paises: ans.paises, como_arman_budget: ans.como, revisiones_anio: ans.revisiones,
+      calc: this.fromCalc() ? this.props.calc : null, web_sitio: this.state.hp
+    });
+    AREDPI.post(payload);
+    const calificado = !AREDPI.CONFIG.NO_CALIFICA.includes(ans.empleados);
+    if (calificado) {
+      const norm = email.toLowerCase();
+      AREDPI.push('lead_calificado', { lead_id: payload.id, origen: payload.origen, user_data: { email: norm, sha256_email_address: await AREDPI.sha256(norm) } });
+      this.setState({ phase: 'agenda' });
+    } else {
+      AREDPI.push('lead_no_calificado', { lead_id: payload.id, origen: payload.origen });
+      this.setState({ phase: 'gracias' });
+    }
+  };
+
+  initCalendly() {
+    const ans = this.answers(), p = AREDPI.getParams();
+    let tries = 0;
+    const go = () => {
+      if (!window.AREDPI || !AREDPI.CONFIG.CALENDLY_ACTIVO) return; // TODO: activar al publicar
+      const el = this.calTargetRef.current;
+      if (!el) return;
+      if (!window.Calendly) { if (tries++ < 50) setTimeout(go, 200); return; }
+      this.setState({ calLive: true });
+      Calendly.initInlineWidget({
+        url: (((document.getElementById('calendly-inline') || {}).dataset || {}).url || AREDPI.CONFIG.CALENDLY_URL) + '?hide_gdpr_banner=1&primary_color=ff6f31',
+        parentElement: el,
+        prefill: { name: this.state.nombre.trim(), email: this.state.email.trim(), customAnswers: { a1: ans.empleados, a2: ans.paises, a3: ans.como, a4: ans.revisiones } },
+        utm: { utmSource: p.utm_source, utmMedium: p.utm_medium, utmCampaign: p.utm_campaign, utmContent: p.utm_content, utmTerm: p.utm_term }
+      });
+    };
+    setTimeout(go, 50);
+  }
+
+  renderVals() {
+    const steps = this.steps(), i = this.state.i, key = steps[i], phase = this.state.phase;
+    const q = this.constructor.Q[key];
+    const st = this.emailStatus();
+    const showErr = (this.state.touched || this.state.email.length > 3) && st !== 'ok';
+    const msg = st === 'free' || st === 'format' || st === 'empty'
+      ? 'Usa tu correo de la empresa para que podamos preparar la reunión con tus datos.'
+      : 'Correo corporativo válido.';
+    const pct = phase === 'q' ? Math.round((i + 1) / (steps.length + 1) * 100) : 100;
+    const mobile = this.props.forceMobile ?? this.state.w < 768;
+    const DOWN = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+    const calDays = [];
+    for (let k = 0; k < 3; k++) calDays.push({ n: '', off: true, vis: 'hidden', bg: 'transparent', fg: 'transparent', fw: 400, cur: 'default', label: '', sel: 'false', pick: () => {} });
+    for (let d = 1; d <= 31; d++) {
+      const dw = (3 + d - 1) % 7, avail = d >= 5 && dw < 5 && d !== 12, sel = avail && d === this.state.calDay;
+      calDays.push({ n: String(d), off: !avail, vis: 'visible', bg: sel ? '#FF6F31' : avail ? '#FFF3EC' : 'transparent', fg: sel ? '#FFFFFF' : avail ? '#C4430F' : '#B5B5B1', fw: avail ? 600 : 400, cur: avail ? 'pointer' : 'default', sel: sel ? 'true' : 'false',
+        label: DOWN[dw] + ' ' + d + ' de octubre' + (avail ? '' : ', sin horarios'), pick: () => avail && this.setState({ calDay: d, calSlot: '' }) });
+    }
+    const cdw = (3 + this.state.calDay - 1) % 7, selName = DOWN[cdw];
+    return {
+      open: !!this.props.open,
+      stop: e => e.stopPropagation(),
+      onBackdrop: () => this.close(),
+      close: this.close,
+      back: () => this.setState(s => ({ i: Math.max(0, s.i - 1) })),
+      canBack: phase === 'q' && i > 0,
+      stepLabel: phase === 'q' ? 'Paso ' + (i + 1) + ' de ' + steps.length : phase === 'agenda' ? 'Agenda la reunión' : 'Listo',
+      progress: pct + '%', progressNum: pct,
+      isQuestion: phase === 'q' && key !== 'datos',
+      isDatos: phase === 'q' && key === 'datos',
+      isAgenda: phase === 'agenda',
+      isGracias: phase === 'gracias',
+      panelMax: phase === 'agenda' ? '1000px' : '620px',
+      pos: this.props.embedded ? 'absolute' : 'fixed',
+      nombreCorto: (this.state.nombre.trim().split(/\s+/)[0]) || '',
+      calTargetRef: this.calTargetRef, calPlaceholder: !this.state.calLive,
+      calDow: ['L', 'M', 'M', 'J', 'V', 'S', 'D'], calDays,
+      calSelLabel: selName.charAt(0).toUpperCase() + selName.slice(1) + ' ' + this.state.calDay + ' de octubre',
+      calSlots: ['09:00', '09:30', '10:30', '11:00', '14:00', '15:30', '16:30'].map(t => { const on = this.state.calSlot === t; return { t, sel: on ? 'true' : 'false', bg: on ? '#FF6F31' : '#FFFFFF', fg: on ? '#FFFFFF' : '#C4430F', pick: () => this.setState({ calSlot: t }) }; }),
+      q: q ? { title: q.title, options: q.options.map(label => ({ label, selected: this.state.a[key] === label, pick: () => this.pick(key, label) })) } : { title: '', options: [] },
+      nombre: this.state.nombre, email: this.state.email, hp: this.state.hp,
+      onNombre: e => this.setState({ nombre: e.target.value }),
+      onEmail: e => this.setState({ email: e.target.value }),
+      onHp: e => this.setState({ hp: e.target.value }),
+      submit: this.submit,
+      cannotSubmit: st !== 'ok' || !this.state.nombre.trim(),
+      emailBorder: showErr ? 'var(--error)' : st === 'ok' ? 'var(--success)' : 'var(--border)',
+      emailInvalidAttr: showErr ? 'true' : 'false',
+      emailMsg: showErr ? msg : st === 'ok' ? msg : 'Usa tu correo de la empresa para que podamos preparar la reunión con tus datos.',
+      emailMsgColor: showErr ? 'var(--error)' : 'var(--ink-muted)',
+      emailMsgRole: showErr ? 'alert' : 'status',
+      agendaRef: this.agendaRef, panelRef: this.panelRef,
+      agendaH: mobile ? '1000px' : '700px'
+    };
+  }
+}
+</script>
+</body>
+</html>
