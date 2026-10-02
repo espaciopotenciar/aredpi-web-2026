@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
@@ -44,6 +43,7 @@
       <sc-if value="{{ isQuestion }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex; flex-direction:column; gap:24px;">
           <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em; text-wrap:pretty;">{{ q.title }}</h2>
+          <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}"><p style="margin:-12px 0 0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Cuatro preguntas rápidas para que la reunión sea sobre tu caso, no una demo genérica.</p></sc-if>
           <div role="radiogroup" aria-labelledby="calif-titulo" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
             <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="4">
               <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.OptionChip" label="{{ o.label }}" selected="{{ o.selected }}" on-click="{{ o.pick }}" hint-size="100%,60px"></x-import>
@@ -72,8 +72,8 @@
             <input id="web_sitio" name="web_sitio" type="text" tabindex="-1" autocomplete="off" value="{{ hp }}" onInput="{{ onHp }}">
           </div>
           <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
-            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" type="submit" disabled="{{ cannotSubmit }}" hint-size="160px,52px">Continuar</x-import>
-            <span style="font-size:13px; line-height:1.5; color:var(--ink-muted);">Te escribimos solo para coordinar la reunión.</span>
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" type="submit" disabled="{{ cannotSubmit }}" hint-size="160px,52px">Continuar</x-import>
+            <span style="font-size:13px; line-height:1.5; color:var(--ink-muted);">No compartimos tus datos. Solo los usamos para preparar la reunión. <a href="https://aredpi.com/2025/wp-content/uploads/2026/03/Politica_de_Privacidad_AREDPI.pdf" target="_blank" rel="noopener" style="color:#C4430F; text-decoration:underline;">Política de privacidad</a></span>
           </div>
         </form>
       </sc-if>
@@ -122,7 +122,7 @@
               </div>
             </sc-if>
           </div>
-          <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Te llega la invitación a tu correo corporativo. ¿No ves el calendario? <a href="{{ calLink }}" target="_blank" rel="noopener" style="color:#C4430F; font-weight:500;">Ábrelo aquí</a>.</p>
+          <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-muted);">Te llega la invitación a tu correo corporativo. ¿No ves el calendario? <a href="{{ calFallback }}" target="_blank" rel="noopener" style="color:#C4430F; text-decoration:underline;">Ábrelo aquí</a>.</p>
         </div>
       </sc-if>
 
@@ -132,8 +132,9 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
           </span>
           <h2 id="calif-titulo" style="margin:0; font-size:clamp(26px, 3.4vw, 34px); line-height:1.12; font-weight:400; letter-spacing:-0.025em;">Gracias, recibimos tus datos.</h2>
-          <p style="margin:0; font-size:17px; line-height:1.6; color:var(--ink-muted); max-width:440px; text-wrap:pretty;">Te escribimos por correo con los próximos pasos y material para que veas cómo trabaja la aREDPI WebApp de Budget &amp; Forecast.</p>
-          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" variant="secondary" on-click="{{ close }}" hint-size="120px,52px">Cerrar</x-import>
+          <p style="margin:0; font-size:17px; line-height:1.6; color:var(--ink-muted); max-width:440px; text-wrap:pretty;">Te escribimos por correo con los próximos pasos y, mientras tanto, esta guía te puede servir:</p>
+          <a href="https://aredpi.com/2026/04/09/presupuesto-de-gastos-salariales-guia-practica-para-empresas-grandes/" style="font-size:17px; font-weight:500; line-height:1.45; color:#C4430F; text-wrap:pretty;">Presupuesto de gastos salariales: guía práctica para empresas grandes</a>
+          <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" variant="secondary" on-click="{{ close }}" hint-size="120px,52px">Cerrar</x-import>
         </div>
       </sc-if>
     </div>
@@ -158,21 +159,21 @@ class Component extends DCLogic {
   steps() { return this.fromCalc() ? ['empleados', 'paises', 'datos'] : ['empleados', 'paises', 'como', 'revisiones', 'datos']; }
 
   componentDidMount() {
+    this._pOpen = this.props.open; this._prev = { i: this.state.i, phase: this.state.phase };
     if (this.props.previewStep === 'agenda') this.setState({ phase: 'agenda', nombre: this.props.previewName || '' });
     this.onKey = e => { if (this.props.open && e.key === 'Escape') this.close(); };
     this.onResize = () => this.setState({ w: innerWidth });
     addEventListener('keydown', this.onKey); addEventListener('resize', this.onResize);
   }
   componentWillUnmount() { removeEventListener('keydown', this.onKey); removeEventListener('resize', this.onResize); document.documentElement.style.overflow = ''; }
-  componentDidUpdate(pp, ps) {
-    // El runtime publicado no pasa el estado anterior: lo guardamos a mano.
-    ps = this.__ps || { i: this.state.i, phase: this.state.phase };
-    this.__ps = { i: this.state.i, phase: this.state.phase };
+  componentDidUpdate(pp) {
     pp = pp || {};
-    if (this.props.open && !pp.open) { this.setState({ i: 0, a: {}, touched: false, hp: '', phase: 'q' }); if (!this.props.embedded) document.documentElement.style.overflow = 'hidden'; this.focusFirst(); }
-    if (!this.props.open && pp.open) document.documentElement.style.overflow = '';
+    const wasOpen = this._pOpen, ps = this._prev || { i: this.state.i, phase: this.state.phase };
+    if (this.props.open && !wasOpen) { this.setState({ i: 0, a: {}, touched: false, hp: '', phase: 'q' }); if (!this.props.embedded) document.documentElement.style.overflow = 'hidden'; this.focusFirst(); }
+    if (!this.props.open && wasOpen) document.documentElement.style.overflow = '';
     if (this.props.open && (ps.i !== this.state.i || ps.phase !== this.state.phase)) this.focusFirst();
     if (this.state.phase === 'agenda' && ps.phase !== 'agenda') this.initCalendly();
+    this._pOpen = this.props.open; this._prev = { i: this.state.i, phase: this.state.phase };
   }
   focusFirst() { setTimeout(() => { const p = this.panelRef.current; if (!p) return; const el = p.querySelector('[role=radio][aria-checked=true]') || p.querySelector('[role=radio], input:not([tabindex="-1"])'); el && el.focus(); }, 80); }
 
@@ -256,6 +257,9 @@ class Component extends DCLogic {
     }
     const cdw = (3 + this.state.calDay - 1) % 7, selName = DOWN[cdw];
     return {
+      btnWrap: { style: { whiteSpace: 'normal', height: 'auto', minHeight: 52, maxWidth: '100%', paddingTop: 8, paddingBottom: 8, textAlign: 'left' } },
+      showIntro: phase === 'q' && i === 0 && !this.fromCalc(),
+      calFallback: 'https://calendly.com/aredpi_/webapp?name=' + encodeURIComponent(this.state.nombre || '') + '&email=' + encodeURIComponent(this.state.email || ''),
       open: !!this.props.open,
       stop: e => e.stopPropagation(),
       onBackdrop: () => this.close(),
@@ -271,7 +275,6 @@ class Component extends DCLogic {
       panelMax: phase === 'agenda' ? '1000px' : '620px',
       pos: this.props.embedded ? 'absolute' : 'fixed',
       nombreCorto: (this.state.nombre.trim().split(/\s+/)[0]) || '',
-      calLink: 'https://calendly.com/aredpi_/webapp?name=' + encodeURIComponent(this.state.nombre.trim()) + '&email=' + encodeURIComponent(this.state.email.trim()),
       calTargetRef: this.calTargetRef, calPlaceholder: !this.state.calLive,
       calDow: ['L', 'M', 'M', 'J', 'V', 'S', 'D'], calDays,
       calSelLabel: selName.charAt(0).toUpperCase() + selName.slice(1) + ' ' + this.state.calDay + ' de octubre',

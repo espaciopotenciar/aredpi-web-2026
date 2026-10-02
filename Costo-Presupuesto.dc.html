@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
@@ -15,7 +14,7 @@
   <meta property="og:description" content="Calcúlalo en dos minutos. No te pedimos salarios ni datos de nómina: solo horas.">
   <meta property="og:image" content="assets/home-v2-frame-2.png">
   <meta property="og:type" content="website">
-  <meta name="robots" content="noindex">
+  <meta name="robots" content="noindex, nofollow">
   <!-- TODO GTM: pegar acá el snippet de Google Tag Manager (head) -->
   <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script> -->
   <link rel="stylesheet" href="_ds/aredpi-design-system-7fcdf149-b9d8-4951-b1a7-599dd3b92b25/tokens/fonts.css">
@@ -33,8 +32,9 @@
   <script src="fondo-animado-budget-claro.js"></script>
   <style>
     html, body { margin: 0; background: #FAFAF8; overflow-x: clip; }
-    fieldset { min-width: 0; max-width: 100%; } input, select, textarea { min-width: 0; max-width: 100%; }
     a { color: #C4430F; text-decoration: none; }
+    fieldset { min-width: 0; max-width: 100%; }
+    input, select, textarea { min-width: 0; max-width: 100%; }
     a:hover { color: #F0501F; }
     input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     @keyframes aredpiShine { from { background-position: 0% center; } to { background-position: 200% center; } }
@@ -46,7 +46,7 @@
   <header style="position:fixed; top:14px; left:14px; right:14px; z-index:50; display:flex; justify-content:center; pointer-events:none;">
     <div style="pointer-events:auto; width:100%; max-width:1200px; height:64px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 10px 0 18px; border-radius:999px; background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(47,47,47,0.06); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px rgba(47,47,47,0.06);">
       <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="44" height="44" style="height:44px; width:44px; mix-blend-mode:multiply; display:block;">
-      <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una reunión</x-import></span>
+      <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" on-click="{{ openQ }}" hint-size="230px,52px">Agenda una reunión</x-import></span>
     </div>
   </header>
 
@@ -58,7 +58,7 @@
           <h1 id="t-hero" style="margin:0; font-size:clamp(38px, 5.6vw, 72px); line-height:1.02; font-weight:400; letter-spacing:-0.035em; text-wrap:balance;">¿Cuántas horas le cuesta a tu empresa armar el <span style="background-image:linear-gradient(to right, #C4430F 0%, #F0501F 25%, #FF8A4C 45%, #F0501F 65%, #C4430F 100%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:aredpiShine 6s linear infinite;">presupuesto salarial</span>?</h1>
           <p style="margin:0; font-size:clamp(17px, 1.6vw, 20px); line-height:1.55; color:#6F6F6F; max-width:560px;">Calcúlalo en dos minutos. No te pedimos salarios ni datos de nómina: solo horas.</p>
           <div style="display:flex;">
-            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" size="lg" href="#calculadora" on-click="{{ goCalc }}" hint-size="250px,60px">Calcular mis horas</x-import>
+            <x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" size="lg" href="#calculadora" on-click="{{ goCalc }}" hint-size="250px,60px">Calcular mis horas</x-import>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
         </fieldset>
 
         <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px 24px; padding-top:8px;">
-          <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" type="submit" size="lg" hint-size="180px,60px">Calcular</x-import></span>
+          <span data-magnetic="1" style="display:inline-flex;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" type="submit" size="lg" hint-size="180px,60px">Calcular</x-import></span>
           <span style="font-size:14px; line-height:1.5; color:#6F6F6F; max-width:420px;">El cálculo se hace en tu navegador: no guardamos tus respuestas ni te pedimos datos de nómina.</span>
         </div>
       </form>
@@ -191,7 +191,7 @@
             </div>
           </div>
           <div style="display:flex; flex-direction:column; align-items:flex-start; gap:20px; padding:24px 0 0;">
-            <span data-magnetic="1" style="display:inline-flex; max-width:100%;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" size="lg" on-click="{{ openQCalc }}" style="{{ btnWrap }}" hint-size="520px,60px">Agenda una reunión para ver cómo sería con la WebApp</x-import></span>
+            <span data-magnetic="1" style="display:inline-flex; max-width:100%;"><x-import component-from-global-scope="AREDPIDesignSystem_7fcdf1.Button" dc-props="{{ btnWrap }}" size="lg" on-click="{{ openQCalc }}" style="{{ btnWrap }}" hint-size="520px,60px">Agenda una reunión para ver cómo sería con la WebApp</x-import></span>
             <p style="margin:0; font-size:14px; line-height:1.55; color:#6F6F6F;">Estimación con los datos que ingresaste. Supone jornadas de 8 horas. No es una promesa de resultado.</p>
             <p style="margin:0; display:flex; align-items:center; gap:10px; font-size:14px; line-height:1.55; color:#6F6F6F;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6F6F6F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><rect width="18" height="11" x="3" y="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -203,8 +203,32 @@
     </section>
   </main>
 
-  <footer style="padding:32px 24px 40px; border-top:1px solid #E4E4E1; background:#F1F1EE;">
-    <p style="max-width:1200px; margin:0 auto; font-size:13px; color:#6F6F6F;">© aREDPI. Todos los derechos reservados.</p>
+  <footer style="background:#F1F1EE; padding:72px 24px 40px; border-top:1px solid #E4E4E1;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:40px;">
+        <img src="assets/logo-aredpi-320.jpg" alt="aREDPI" width="64" height="64" loading="lazy" style="width:64px; height:64px; mix-blend-mode:multiply;">
+        <nav aria-label="Pie" style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="Home.dc.html#especialistas" style="color:#2F2F2F;" style-hover="color:#C4430F;">Nosotros</a>
+          <a href="Home.dc.html#soluciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Soluciones</a>
+          <a href="Home.dc.html#como-trabajamos" style="color:#2F2F2F;" style-hover="color:#C4430F;">Enfoque</a>
+          <a href="blog.html" style="color:#2F2F2F;" style-hover="color:#C4430F;">Blog</a>
+          <a href="https://aredpi.com/terminos-y-condiciones" style="color:#2F2F2F;" style-hover="color:#C4430F;">Términos y condiciones</a>
+          <a href="https://aredpi.com/2025/wp-content/uploads/2026/03/Politica_de_Privacidad_AREDPI.pdf" target="_blank" rel="noopener" style="color:#2F2F2F;" style-hover="color:#C4430F;">Política de privacidad</a>
+        </nav>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <a href="mailto:info@aredpi.com" style="color:#2F2F2F;" style-hover="color:#C4430F;">info@aredpi.com</a>
+          <a href="tel:+543484428046" style="color:#2F2F2F; font-family:var(--font-mono); font-size:14px;" style-hover="color:#C4430F;">+54 348 4428046</a>
+          <a href="https://wa.me/543484428046" style="color:#2F2F2F;" style-hover="color:#C4430F;">WhatsApp</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+          <!-- TODO: confirmar URLs de redes -->
+          <a href="https://www.linkedin.com/company/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">LinkedIn</a>
+          <a href="https://www.instagram.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Instagram</a>
+          <a href="https://www.facebook.com/aredpi" style="color:#2F2F2F;" style-hover="color:#C4430F;">Facebook</a>
+        </div>
+      </div>
+      <p style="margin:0; padding-top:24px; border-top:1px solid #E4E4E1; font-size:13px; color:#6F6F6F;">© aREDPI. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
   <dc-import name="Calificador" open="{{ qOpen }}" on-close="{{ closeQ }}" source="{{ qSource }}" calc="{{ calcData }}" hint-size="0px,0px"></dc-import>
@@ -257,6 +281,7 @@ class Component extends DCLogic {
     const vh = parseFloat(String(s.valorHora).replace(',', '.'));
     const revAnioStr = s.forecast ? String(s.revAnio) : 'Ninguna';
     return {
+      btnWrap: { style: { whiteSpace: 'normal', height: 'auto', minHeight: 52, maxWidth: '100%', paddingTop: 8, paddingBottom: 8, textAlign: 'left' } },
       canvasRef: this.canvasRef, resultRef: this.resultRef,
       goCalc: (e) => { e && e.preventDefault && e.preventDefault(); const el = document.getElementById('calculadora'); if (el) window.scrollBy({ top: el.getBoundingClientRect().top - 96, behavior: 'smooth' }); },
       calcular: this.calcular,
